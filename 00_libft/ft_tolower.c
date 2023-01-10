@@ -6,9 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:28:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2022/11/09 20:29:46 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:36:10 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 static int	ft_isupper(int c)
 {
