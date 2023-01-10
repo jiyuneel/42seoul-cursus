@@ -6,9 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:23:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2022/11/09 20:26:25 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:36:26 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 static int	ft_islower(int c)
 {
