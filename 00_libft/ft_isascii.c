@@ -6,9 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:34:26 by jiyunlee          #+#    #+#             */
-/*   Updated: 2022/11/16 18:28:06 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:34:09 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isascii(int c)
 {
