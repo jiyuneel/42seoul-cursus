@@ -6,9 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:29:24 by jiyunlee          #+#    #+#             */
-/*   Updated: 2022/11/22 14:03:36 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:36:48 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
