@@ -19,7 +19,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	void	*ptr;
 
 	if (!lst)
-		return (0);
+		return (NULL);
 	newlst = 0;
 	while (lst)
 	{
@@ -29,7 +29,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		{
 			ft_lstclear(&newlst, (*del));
 			del(ptr);
-			return (0);
+			return (NULL);
 		}
 		ft_lstadd_back(&newlst, node);
 		lst = lst->next;
