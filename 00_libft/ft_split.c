@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:47:43 by jiyunlee          #+#    #+#             */
-/*   Updated: 2022/11/17 17:33:51 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:03:49 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	**free_arr(char **arr, int index)
 	while (index-- > 0)
 		free(arr[index]);
 	free(arr);
-	return (0);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
@@ -60,7 +60,7 @@ char	**ft_split(char const *s, char c)
 
 	arr = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
 	if (!arr)
-		return (0);
+		return (NULL);
 	index = 0;
 	while (*s)
 	{
