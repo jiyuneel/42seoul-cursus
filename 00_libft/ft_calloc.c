@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:35:50 by jiyunlee          #+#    #+#             */
-/*   Updated: 2022/11/16 19:29:14 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:04:52 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_calloc(size_t count, size_t size)
 	i = 0;
 	ptr = malloc(size * count);
 	if (!ptr)
-		return (0);
+		return (NULL);
 	while (i < size * count)
 	{
 		ptr[i] = 0;
