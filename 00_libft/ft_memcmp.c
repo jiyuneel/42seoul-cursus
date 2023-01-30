@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:02:04 by jiyunlee          #+#    #+#             */
-/*   Updated: 2022/11/14 17:30:10 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:54:50 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		tmp1++;
 		tmp2++;
 	}
-	return (NULL);
+	return (0);
 }
