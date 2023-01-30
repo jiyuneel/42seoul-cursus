@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:47:43 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/01/19 15:03:49 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:37:56 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ char	**ft_split(char const *s, char c)
 		else
 			s++;
 	}
-	arr[index] = 0;
+	arr[index] = NULL;
 	return (arr);
 }
