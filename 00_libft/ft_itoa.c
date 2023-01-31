@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	str = (char *)malloc(sizeof(char) * numlen(n) + 1);
 	if (!str)
-		return (0);
+		return (NULL);
 	num = n;
 	i = numlen(n);
 	str[i--] = 0;
