@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 16:41:51 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:42:38 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ void	rotate(t_stack *stack)
 		printf("ra\n");
 	else if (stack->name == 'b')
 		printf("rb\n");
+}
+
+void	rev_rotate(t_stack *stack)
+{
+	if (stack->len == 1)
+		return ;
+	stack->top = stack->top->prev;
+	if (stack->name == 'a')
+		printf("rra\n");
+	else if (stack->name == 'b')
+		printf("rrb\n");
 }
