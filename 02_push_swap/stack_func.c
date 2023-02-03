@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 16:26:47 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:29:48 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,14 @@ t_list	*pop(t_stack *stack)
 	if (stack->len == 0)
 		stack->top = NULL;
 	return (node);
+}
+
+void	push(t_stack *from, t_stack *to)
+{
+	ft_lstadd_back(to, pop(from));
+	to->top = to->top->prev;
+	if (to->name == 'a')
+		printf("pa\n");
+	else if (to->name == 'b')
+		printf("pb\n");
 }
