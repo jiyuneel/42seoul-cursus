@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 14:42:24 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:31:25 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 
 	a->len = 0;
 	a->top = NULL;
+	a->name = 'a';
 	b->len = 0;
 	b->top = NULL;
+	b->name = 'b';
 	i = 1;
 	while (argv[i])
 		ft_lstadd_back(a, ft_lstnew(atoi(argv[i++])));
