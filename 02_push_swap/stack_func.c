@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 16:42:38 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:48:35 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	push(t_stack *from, t_stack *to)
 	ft_lstadd_back(to, pop(from));
 	to->top = to->top->prev;
 	if (to->name == 'a')
-		printf("pa\n");
+		write(1, "pa\n", 3);
 	else if (to->name == 'b')
-		printf("pb\n");
+		write(1, "pb\n", 3);
 }
 
 void	rotate(t_stack *stack)
@@ -42,9 +42,9 @@ void	rotate(t_stack *stack)
 		return ;
 	stack->top = stack->top->next;
 	if (stack->name == 'a')
-		printf("ra\n");
+		write(1, "ra\n", 3);
 	else if (stack->name == 'b')
-		printf("rb\n");
+		write(1, "rb\n", 3);
 }
 
 void	rev_rotate(t_stack *stack)
@@ -53,7 +53,7 @@ void	rev_rotate(t_stack *stack)
 		return ;
 	stack->top = stack->top->prev;
 	if (stack->name == 'a')
-		printf("rra\n");
+		write(1, "rra\n", 3);
 	else if (stack->name == 'b')
-		printf("rrb\n");
+		write(1, "rrb\n", 3);
 }
