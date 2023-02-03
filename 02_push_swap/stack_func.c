@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 16:29:48 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:41:51 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,15 @@ void	push(t_stack *from, t_stack *to)
 		printf("pa\n");
 	else if (to->name == 'b')
 		printf("pb\n");
+}
+
+void	rotate(t_stack *stack)
+{
+	if (stack->len == 1)
+		return ;
+	stack->top = stack->top->next;
+	if (stack->name == 'a')
+		printf("ra\n");
+	else if (stack->name == 'b')
+		printf("rb\n");
 }
