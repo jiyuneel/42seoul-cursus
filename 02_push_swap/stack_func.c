@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 16:48:35 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:06:00 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	rev_rotate(t_stack *stack)
 		return ;
 	stack->top = stack->top->prev;
 	if (stack->name == 'a')
-		write(1, "rra\n", 3);
+		write(1, "rra\n", 4);
 	else if (stack->name == 'b')
-		write(1, "rrb\n", 3);
+		write(1, "rrb\n", 4);
 }
