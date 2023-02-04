@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/04 19:20:52 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:29:41 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_list	*ft_lstnew(int val)
 {
 	t_list	*stack;
 
-	stack = (t_list *)malloc(sizeof(t_list) * 1);
+	stack = (t_list *)malloc(sizeof(t_list));
 	if (!stack)
 		return (NULL);
 	stack->val = val;
@@ -93,6 +93,7 @@ void	set_idx(t_stack *stack)
 void	stack_init(t_stack *a, t_stack *b, char **argv)
 {
 	long long	argval;
+	t_list		*new;
 
 	a->len = 0;
 	a->top = NULL;
@@ -104,7 +105,14 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 	{
 		argval = ft_atoi(*argv);
 		check_error(a, *argv, argval);
-		ft_lstadd_back(a, ft_lstnew(argval));
+		new = ft_lstnew(argval);
+		if (!new)
+		{
+			free_list(a);
+			write(2, "Error\n", 6);
+			exit(1);
+		}
+		ft_lstadd_back(a, new);
 		argv++;
 	}
 	set_idx(a);

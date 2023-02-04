@@ -6,11 +6,25 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:30:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/04 19:17:52 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:31:14 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	free_list(t_stack *stack)
+{
+	t_list	*tmp;
+
+	while (stack->len--)
+	{
+		tmp = stack->top;
+		stack->top = tmp->next;
+		stack->top->prev = tmp->prev;
+		tmp->prev->next = stack->top;
+		free(tmp);
+	}
+}
 
 int	check_digit(char *str)
 {
@@ -49,20 +63,6 @@ int	check_duplicate(t_stack *stack, int val)
 		i++;
 	}
 	return (1);
-}
-
-void	free_list(t_stack *stack)
-{
-	t_list	*tmp;
-
-	while (stack->len--)
-	{
-		tmp = stack->top;
-		stack->top = tmp->next;
-		stack->top->prev = tmp->prev;
-		tmp->prev->next = stack->top;
-		free(tmp);
-	}
 }
 
 void	check_error(t_stack *stack, char *arg_str, long long arg_int)
