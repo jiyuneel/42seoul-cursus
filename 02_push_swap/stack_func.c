@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/04 22:06:00 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:16:24 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_list	*pop(t_stack *stack)
 
 void	push(t_stack *from, t_stack *to)
 {
-	ft_lstadd_back(to, pop(from));
+	lstadd_back(to, pop(from));
 	to->top = to->top->prev;
 	if (to->name == 'a')
 		write(1, "pa\n", 3);

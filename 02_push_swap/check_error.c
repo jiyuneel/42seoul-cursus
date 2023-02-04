@@ -6,25 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:30:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/04 21:31:14 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:15:01 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	free_list(t_stack *stack)
-{
-	t_list	*tmp;
-
-	while (stack->len--)
-	{
-		tmp = stack->top;
-		stack->top = tmp->next;
-		stack->top->prev = tmp->prev;
-		tmp->prev->next = stack->top;
-		free(tmp);
-	}
-}
 
 int	check_digit(char *str)
 {
