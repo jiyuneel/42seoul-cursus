@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:30:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/04 18:46:33 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/04 18:47:32 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,27 @@ int	check_range(long long num)
 	return (1);
 }
 
+int	check_duplicate(t_stack *stack, int val)
+{
+	t_list	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = stack->top;
+	while (i < stack->len)
+	{
+		if (val == tmp->val)
+			return (0);
+		tmp = tmp->next;
+		i++;
+	}
+	return (1);
+}
+
 void	check_error(t_stack *stack, char *arg_str, long long *arg_int)
 {
 	*arg_int = ft_atoi(arg_str);
-	if (!check_digit(arg_str) || !check_range(*arg_int))
+	if (!check_digit(arg_str) || !check_range(*arg_int) || !check_duplicate(stack, *arg_int))
 	{
 		// free_list();
 		write(2, "Error\n", 6);
