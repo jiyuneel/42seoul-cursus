@@ -6,11 +6,32 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/04 16:54:33 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:20:52 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+long long	ft_atoi(const char *str)
+{
+	long long	num;
+	int			sign;
+
+	num = 0;
+	sign = 1;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str && ('0' <= *str && *str <= '9'))
+	{
+		num = num * 10 + (*str - '0');
+		str++;
+	}
+	return (sign * num);
+}
 
 t_list	*ft_lstnew(int val)
 {
@@ -81,7 +102,8 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 	b->name = 'b';
 	while (*argv)
 	{
-		check_error(a, *argv, &argval);
+		argval = ft_atoi(*argv);
+		check_error(a, *argv, argval);
 		ft_lstadd_back(a, ft_lstnew(argval));
 		argv++;
 	}
