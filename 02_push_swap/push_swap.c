@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 17:00:02 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/04 18:16:40 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	main(int argc, char *argv[])
 	t_stack	a;
 	t_stack	b;
 
-	stack_init(&a, &b, argv + 1);
+	if (argc > 1)
+		stack_init(&a, &b, argv + 1);
 
 	// a_to_b();
 	// b_to_a();
