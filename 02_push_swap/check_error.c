@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:30:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 02:15:01 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 03:03:30 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	check_digit(char *str)
 		return (0);
 	if (*str == '+' || *str == '-')
 		str++;
+	if (!*str)
+		return (0);
 	while (*str)
 	{
 		if (!('0' <= *str && *str <= '9'))
@@ -51,12 +53,15 @@ int	check_duplicate(t_stack *stack, int val)
 	return (1);
 }
 
+void	error_exit(t_stack *stack)
+{
+	free_list(stack);
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
 void	check_error(t_stack *stack, char *arg_str, long long arg_int)
 {
 	if (!check_digit(arg_str) || !check_range(arg_int) || !check_duplicate(stack, arg_int))
-	{
-		free_list(stack);
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		error_exit(stack);
 }

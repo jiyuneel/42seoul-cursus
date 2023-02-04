@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 02:15:45 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:54:45 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_stack
 t_list	*lstnew(int val);
 void	lstadd_back(t_stack *stack, t_list *new);
 void	check_error(t_stack *stack, char *arg_str, long long arg_int);
+void	error_exit(t_stack *stack);
 void	free_list(t_stack *stack);
 void	stack_init(t_stack *a, t_stack *b, char **argv);
 void	push(t_stack *from, t_stack *to);

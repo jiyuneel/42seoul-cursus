@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 02:16:11 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 03:07:57 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,7 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 		check_error(a, *argv, argval);
 		new = lstnew(argval);
 		if (!new)
-		{
-			free_list(a);
-			write(2, "Error\n", 6);
-			exit(1);
-		}
+			error_exit(a);
 		lstadd_back(a, new);
 		argv++;
 	}
