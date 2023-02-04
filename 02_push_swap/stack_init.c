@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/03 16:58:46 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:54:33 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	set_idx(t_stack *stack)
 
 void	stack_init(t_stack *a, t_stack *b, char **argv)
 {
+	long long	argval;
+
 	a->len = 0;
 	a->top = NULL;
 	a->name = 'a';
@@ -78,6 +80,10 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 	b->top = NULL;
 	b->name = 'b';
 	while (*argv)
-		ft_lstadd_back(a, ft_lstnew(atoi(*argv++)));
+	{
+		check_error(a, *argv, &argval);
+		ft_lstadd_back(a, ft_lstnew(argval));
+		argv++;
+	}
 	set_idx(a);
 }
