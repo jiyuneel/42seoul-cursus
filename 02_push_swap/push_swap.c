@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 04:19:40 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:14:40 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,20 @@ int	main(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
+	char	**arr;
 
 	if (argc == 1)
 		return (0);
-	stack_init(&a, &b, ++argv);
+	else if (argc == 2)
+	{
+		arr = split_space(argv[1]);
+		stack_init(&a, &b, arr);
+		free_arr(arr);
+	}
+	else
+		stack_init(&a, &b, ++argv);
+	if (is_sorted(&a))
+		return (0);
 	a_to_b(&a, &b);
 	b_to_a(&a, &b);
 }
