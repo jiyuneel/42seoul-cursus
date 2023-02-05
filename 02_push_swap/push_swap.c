@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 19:14:40 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:36:43 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 void	a_to_b(t_stack *a, t_stack *b);
 void	b_to_a(t_stack *a, t_stack *b);
 
+void check_leak() {
+	system("leaks -quiet push_swap");
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
 	char	**arr;
 
+	atexit(check_leak);
 	if (argc == 1)
 		return (0);
 	else if (argc == 2)
@@ -35,6 +40,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	a_to_b(&a, &b);
 	b_to_a(&a, &b);
+	free_list(&a);
 }
 
 void	a_to_b(t_stack *a, t_stack *b)
