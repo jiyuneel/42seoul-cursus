@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 02:13:02 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 02:15:56 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:29:26 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,23 @@ void	free_list(t_stack *stack)
 		tmp->prev->next = stack->top;
 		free(tmp);
 	}
+}
+
+int	is_sorted(t_stack *stack)
+{
+	t_list	*tmp;
+	int		i;
+	int		val;
+
+	i = 0;
+	tmp = stack->top;
+	while (i < stack->len - 1)
+	{
+		val = tmp->val;
+		if (val > tmp->next->val)
+			return (0);
+		tmp = tmp->next;
+		i++;
+	}
+	return (1);
 }

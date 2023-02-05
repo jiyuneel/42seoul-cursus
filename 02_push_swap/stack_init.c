@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 03:41:42 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:34:48 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,6 @@ long long	ft_atoi(const char *str)
 		str++;
 	}
 	return (sign * num);
-}
-
-int	is_sorted(t_stack *stack)
-{
-	t_list	*tmp;
-	int		i;
-	int		val;
-
-	i = 0;
-	tmp = stack->top;
-	while (i < stack->len - 1)
-	{
-		val = tmp->val;
-		if (val > tmp->next->val)
-			return (0);
-		tmp = tmp->next;
-		i++;
-	}
-	return (1);
 }
 
 void	set_idx(t_stack *stack)
@@ -89,6 +70,8 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 	b->len = 0;
 	b->top = NULL;
 	b->name = 'b';
+	if (!argv)
+		error_exit(a);
 	while (*argv)
 	{
 		argval = ft_atoi(*argv);
@@ -99,7 +82,5 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 		lstadd_back(a, new);
 		argv++;
 	}
-	if (is_sorted(a))
-		exit(0);
 	set_idx(a);
 }
