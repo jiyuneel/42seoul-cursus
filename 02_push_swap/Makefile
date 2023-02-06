@@ -6,16 +6,17 @@
 #    By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 04:48:13 by jiyunlee          #+#    #+#              #
-#    Updated: 2023/02/05 16:44:16 by jiyunlee         ###   ########.fr        #
+#    Updated: 2023/02/06 15:33:37 by jiyunlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 
+DIR		= ./push_swap_prgm
 SRCS	= \
-push_swap.c		list_func.c		check_error.c \
-stack_init.c	stack_func.c	split_space.c
+${DIR}/push_swap.c		${DIR}/list_func.c		${DIR}/check_error.c \
+${DIR}/stack_init.c		${DIR}/stack_func.c		${DIR}/split_space.c
 OBJS	= ${SRCS:.c=.o}
 NAME	= push_swap
 
