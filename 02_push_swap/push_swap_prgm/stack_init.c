@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 16:34:48 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:39:29 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,28 @@ void	set_idx(t_stack *stack)
 	}
 }
 
-void	stack_init(t_stack *a, t_stack *b, char **argv)
+void	stack_push(t_stack *stack, char **arr)
 {
 	long long	argval;
 	t_list		*new;
+
+	if (!arr || !*arr)
+		error_exit(stack);
+	while (*arr)
+	{
+		argval = ft_atoi(*arr);
+		check_error(stack, *arr, argval);
+		new = lstnew(argval);
+		if (!new)
+			error_exit(stack);
+		lstadd_back(stack, new);
+		arr++;
+	}
+}
+
+void	stack_init(t_stack *a, t_stack *b, char **argv)
+{
+	char	**arr;
 
 	a->len = 0;
 	a->top = NULL;
@@ -70,16 +88,14 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 	b->len = 0;
 	b->top = NULL;
 	b->name = 'b';
+
 	if (!argv)
 		error_exit(a);
 	while (*argv)
 	{
-		argval = ft_atoi(*argv);
-		check_error(a, *argv, argval);
-		new = lstnew(argval);
-		if (!new)
-			error_exit(a);
-		lstadd_back(a, new);
+		arr = split_space(*argv);
+		stack_push(a, arr);
+		free_arr(arr);
 		argv++;
 	}
 	set_idx(a);
