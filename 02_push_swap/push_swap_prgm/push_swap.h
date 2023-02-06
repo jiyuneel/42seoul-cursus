@@ -6,12 +6,15 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 19:04:59 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 00:19:50 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 # include <stdlib.h>
 # include <unistd.h>

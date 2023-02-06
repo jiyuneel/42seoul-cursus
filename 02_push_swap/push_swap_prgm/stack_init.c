@@ -6,13 +6,13 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/06 17:39:29 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 00:24:34 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long long	ft_atoi(const char *str)
+long long	to_integer(const char *str)
 {
 	long long	num;
 	int			sign;
@@ -68,7 +68,7 @@ void	stack_push(t_stack *stack, char **arr)
 		error_exit(stack);
 	while (*arr)
 	{
-		argval = ft_atoi(*arr);
+		argval = to_integer(*arr);
 		check_error(stack, *arr, argval);
 		new = lstnew(argval);
 		if (!new)
