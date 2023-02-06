@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 19:36:43 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:18:28 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 	t_stack	b;
 	char	**arr;
 
-	atexit(check_leak);
+	//atexit(check_leak);
 	if (argc == 1)
 		return (0);
 	else if (argc == 2)
@@ -40,6 +40,10 @@ int	main(int argc, char *argv[])
 		return (0);
 	a_to_b(&a, &b);
 	b_to_a(&a, &b);
+	// if (is_sorted(&a))
+	// 	write(1, "OK\n", 3);
+	// else
+	// 	write(1, "KO\n", 3);
 	free_list(&a);
 }
 
@@ -59,14 +63,19 @@ void	a_to_b(t_stack *a, t_stack *b)
 			push(a, b);
 			i++;
 		}
-		else if (top > i && top <= i + scale)
+		else if (i < top && top <= i + scale)
 		{
 			push(a, b);
 			rotate(b);
 			i++;
 		}
 		else if (top > i + scale)
-			rotate(a);
+		{
+			if (i < a->len / 2 && i >= 0)
+				rev_rotate(a);
+			else
+				rotate(a);
+		}
 	}
 }
 
