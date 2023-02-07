@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 08:32:40 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 20:49:10 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,11 @@
 void	a_to_b(t_stack *a, t_stack *b);
 void	b_to_a(t_stack *a, t_stack *b);
 
-void check_leak() {
-	system("leaks -quiet push_swap");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
 
-	//atexit(check_leak);
 	if (argc == 1)
 		return (0);
 	stack_init(&a, &b, ++argv);
@@ -40,32 +35,71 @@ void	a_to_b(t_stack *a, t_stack *b)
 	float	scale;
 	int		top;
 	int		i;
+	t_cmd	prev;
+	t_cmd	curr;
 
 	scale = 0.000000053 * a->len * a->len + 0.03 * a->len + 14.5;
 	i = 0;
+	prev = -1;
 	while (a->len)
 	{
 		top = a->top->idx;
 		if (top <= i)
 		{
-			push(a, b);
+			curr = PB;
 			i++;
 		}
 		else if (i < top && top <= i + scale)
 		{
-			push(a, b);
-			rotate(b);
+			curr = PB;
+			optimize_cmd(a, b, prev, curr);
+			prev = curr;
+			curr = RB;
 			i++;
 		}
 		else if (top > i + scale)
 		{
 			if (i < a->len / 2 && i >= 0)
-				rev_rotate(a);
+				curr = RRA;
 			else
-				rotate(a);
+				curr = RA;
 		}
+		optimize_cmd(a, b, prev, curr);
+		prev = curr;
 	}
 }
+
+// void	a_to_b(t_stack *a, t_stack *b)
+// {
+// 	float	scale;
+// 	int		top;
+// 	int		i;
+
+// 	scale = 0.000000053 * a->len * a->len + 0.03 * a->len + 14.5;
+// 	i = 0;
+// 	while (a->len)
+// 	{
+// 		top = a->top->idx;
+// 		if (top <= i)
+// 		{
+// 			push(a, b);
+// 			i++;
+// 		}
+// 		else if (i < top && top <= i + scale)
+// 		{
+// 			push(a, b);
+// 			rotate(b);
+// 			i++;
+// 		}
+// 		else if (top > i + scale)
+// 		{
+// 			if (i < a->len / 2 && i >= 0)
+// 				rev_rotate(a, 0);
+// 			else
+// 				rotate(a);
+// 		}
+// 	}
+// }
 
 int	get_big_idx(t_stack *stack)
 {
@@ -97,7 +131,7 @@ void	b_to_a(t_stack *a, t_stack *b)
 		{
 			while (big_idx < b->len)
 			{
-				rev_rotate(b);
+				rev_rotate(b, 0);
 				big_idx++;
 			}
 		}

@@ -6,7 +6,7 @@
 #    By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 04:48:13 by jiyunlee          #+#    #+#              #
-#    Updated: 2023/02/07 15:25:06 by jiyunlee         ###   ########.fr        #
+#    Updated: 2023/02/07 18:44:38 by jiyunlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ GNL		= ./get_next_line
 
 SRCS	= \
 ${DIR}/push_swap.c		${DIR}/split_space.c	${DIR}/list_func.c	\
-${DIR}/check_error.c	${DIR}/stack_init.c		${DIR}/stack_func.c
+${DIR}/check_error.c	${DIR}/stack_init.c		${DIR}/stack_func.c \
+${DIR}/optimize_cmd.c
 
 SRCS_B	= \
 ${DIR_B}/checker_bonus.c		${DIR_B}/split_space_bonus.c \

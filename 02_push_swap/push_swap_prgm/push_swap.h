@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 00:19:50 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:32:19 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ typedef struct s_stack
 	struct s_list	*top;
 }	t_stack;
 
+typedef enum e_cmd
+{
+	SA,
+	SB,
+	SS,
+	PA,
+	PB,
+	RA,
+	RB,
+	RR,
+	RRA,
+	RRB,
+	RRR
+}	t_cmd;
+
 char	**split_space(char const *s);
 char	**free_arr(char **arr);
 void	stack_init(t_stack *a, t_stack *b, char **argv);
@@ -45,6 +60,8 @@ void	check_error(t_stack *stack, char *arg_str, long long arg_int);
 void	error_exit(t_stack *stack);
 void	push(t_stack *from, t_stack *to);
 void	rotate(t_stack *stack);
-void	rev_rotate(t_stack *stack);
+void	rev_rotate(t_stack *stack, int both);
+void	rotate_both(t_stack *a, t_stack *b, int reverse);
+void	optimize_cmd(t_stack *a, t_stack *b, t_cmd prev, t_cmd curr);
 
 #endif
