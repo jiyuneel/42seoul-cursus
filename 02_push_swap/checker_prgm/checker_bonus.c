@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:11:11 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 14:33:46 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:57:38 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 
 void	execute_cmd(t_stack *a, t_stack *b, char *cmd);
 void	execute_cmd2(t_stack *a, t_stack *b, char *cmd);
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	{
 		cmd = get_next_line(0);
 		if (!cmd)
-			break;
+			break ;
 		execute_cmd(&a, &b, cmd);
 	}
 	if (is_sorted(&a) && !b.len)
@@ -61,7 +61,8 @@ void	execute_cmd(t_stack *a, t_stack *b, char *cmd)
 		swap(a);
 	else if (!ft_strcmp(cmd, "sb\n"))
 		swap(b);
-	else if (!ft_strcmp(cmd, "ss\n")) {
+	else if (!ft_strcmp(cmd, "ss\n"))
+	{
 		swap(a);
 		swap(b);
 	}
