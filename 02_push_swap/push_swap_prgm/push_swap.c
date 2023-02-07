@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/06 17:41:17 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 08:32:40 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ int	main(int argc, char *argv[])
 		return (0);
 	a_to_b(&a, &b);
 	b_to_a(&a, &b);
-	// if (is_sorted(&a))
-	// 	write(1, "OK\n", 3);
-	// else
-	// 	write(1, "KO\n", 3);
 	free_list(&a);
 }
 

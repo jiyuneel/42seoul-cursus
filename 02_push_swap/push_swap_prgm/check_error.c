@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:30:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 00:26:19 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 08:20:55 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	check_digit(char *str)
 {
-	if (!*str)
-		return (0);
 	if (*str == '+' || *str == '-')
 		str++;
 	if (!*str)
