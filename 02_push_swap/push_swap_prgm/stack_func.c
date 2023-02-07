@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 02:16:24 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:44:48 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_list	*pop(t_stack *stack)
 
 void	push(t_stack *from, t_stack *to)
 {
+	if (from->len == 0)
+		return ;
 	lstadd_back(to, pop(from));
 	to->top = to->top->prev;
 	if (to->name == 'a')
@@ -38,7 +40,7 @@ void	push(t_stack *from, t_stack *to)
 
 void	rotate(t_stack *stack)
 {
-	if (stack->len == 1)
+	if (stack->len < 2)
 		return ;
 	stack->top = stack->top->next;
 	if (stack->name == 'a')
@@ -49,7 +51,7 @@ void	rotate(t_stack *stack)
 
 void	rev_rotate(t_stack *stack)
 {
-	if (stack->len == 1)
+	if (stack->len < 2)
 		return ;
 	stack->top = stack->top->prev;
 	if (stack->name == 'a')
