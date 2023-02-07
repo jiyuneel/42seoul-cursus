@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:29:23 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 14:31:52 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:33:31 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ void	rev_rotate(t_stack *stack)
 	if (stack->len < 2)
 		return ;
 	stack->top = stack->top->prev;
+}
+
+void	swap(t_stack *stack)
+{
+	t_list	*top;
+	int		tmp;
+
+	if (stack->len < 2)
+		return ;
+	top = stack->top;
+	tmp = top->val;
+	top->val = top->next->val;
+	top->next->val = tmp;
 }
