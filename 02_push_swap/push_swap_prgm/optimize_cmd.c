@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:54:33 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 16:27:30 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:36:27 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	execute_cmd(t_stack *a, t_stack *b, t_cmd cmd)
 {
-	if (cmd == PA)
+	if (cmd == SA)
+		swap(a);
+	else if (cmd == SB)
+		swap(b);
+	else if (cmd == PA)
 		push(b, a);
 	else if (cmd == PB)
 		push(a, b);
@@ -45,4 +49,42 @@ void	optimize_cmd(t_stack *a, t_stack *b, t_cmd prev, t_cmd curr)
 	}
 	else
 		execute_cmd(a, b, curr);
+}
+
+void	sort_three(t_stack *a, t_stack *b)
+{
+	int	val1;
+	int	val2;
+	int	val3;
+
+	val1 = a->top->val;
+	val2 = a->top->next->val;
+	val3 = a->top->prev->val;
+
+	if (val2 < val1 && val1 < val3)
+		execute_cmd(a, b, SA);
+	else if (val2 < val3 && val3 < val1)
+		execute_cmd(a, b, RA);
+	else if (val3 < val1 && val1 < val2)
+		execute_cmd(a, b, RRA);
+	else if (val1 < val3 && val3 < val2)
+	{
+		execute_cmd(a, b, SA);
+		execute_cmd(a, b, RA);
+	}
+	else if (val3 < val2 && val2 < val1)
+	{
+		execute_cmd(a, b, SA);
+		execute_cmd(a, b, RRA);
+	}
+}
+
+void	sort_small_stack(t_stack *a, t_stack *b)
+{
+	int	len;
+
+	if (a->len == 2)
+		execute_cmd(a, b, SA);
+	else if (a->len == 3)
+		sort_three(a, b);
 }

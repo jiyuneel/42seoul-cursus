@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 16:24:04 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:33:10 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ int	main(int argc, char *argv[])
 	stack_init(&a, &b, ++argv);
 	if (is_sorted(&a))
 		return (0);
-	a_to_b(&a, &b);
-	b_to_a(&a, &b);
+	if (a.len <= 5)
+		sort_small_stack(&a, &b);
+	else
+	{
+		a_to_b(&a, &b);
+		b_to_a(&a, &b);
+	}
 	free_list(&a);
 }
 
@@ -95,19 +100,13 @@ void	b_to_a(t_stack *a, t_stack *b)
 		mid = b->len / 2;
 		if (big_idx > mid)
 		{
-			while (big_idx < b->len)
-			{
+			while (big_idx++ < b->len)
 				execute_cmd(a, b, RRB);
-				big_idx++;
-			}
 		}
 		else if (big_idx <= mid)
 		{
-			while (big_idx > 0)
-			{
+			while (big_idx-- > 0)
 				execute_cmd(a, b, RB);
-				big_idx--;
-			}
 		}
 		execute_cmd(a, b, PA);
 	}

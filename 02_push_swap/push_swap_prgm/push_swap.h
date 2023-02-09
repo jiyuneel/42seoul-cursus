@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 16:44:03 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:57:56 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef enum e_cmd
 	RRR
 }	t_cmd;
 
+void	sort_small_stack(t_stack *a, t_stack *b);
 char	**split_space(char const *s);
 char	**free_arr(char **arr);
 void	stack_init(t_stack *a, t_stack *b, char **argv);
