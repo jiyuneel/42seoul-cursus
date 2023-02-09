@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 19:32:19 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:06:20 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	free_list(t_stack *stack);
 void	check_error(t_stack *stack, char *arg_str, long long arg_int);
 void	error_exit(t_stack *stack);
 void	push(t_stack *from, t_stack *to);
-void	rotate(t_stack *stack);
+void	rotate(t_stack *stack, int both);
 void	rev_rotate(t_stack *stack, int both);
 void	rotate_both(t_stack *a, t_stack *b, int reverse);
 void	optimize_cmd(t_stack *a, t_stack *b, t_cmd prev, t_cmd curr);

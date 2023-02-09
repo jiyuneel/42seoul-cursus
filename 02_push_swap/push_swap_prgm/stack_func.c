@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 19:29:44 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:29:16 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,18 @@ void	push(t_stack *from, t_stack *to)
 		write(1, "pb\n", 3);
 }
 
-void	rotate(t_stack *stack)
+void	rotate(t_stack *stack, int both)
 {
 	if (stack->len < 2)
 		return ;
 	stack->top = stack->top->next;
-	if (stack->name == 'a')
-		write(1, "ra\n", 3);
-	else if (stack->name == 'b')
-		write(1, "rb\n", 3);
+	if (!both)
+	{
+		if (stack->name == 'a')
+			write(1, "ra\n", 3);
+		else if (stack->name == 'b')
+			write(1, "rb\n", 3);
+	}
 }
 
 void	rev_rotate(t_stack *stack, int both)
@@ -70,5 +73,11 @@ void	rotate_both(t_stack *a, t_stack *b, int reverse)
 		rev_rotate(a, 1);
 		rev_rotate(b, 1);
 		write(1, "rrr\n", 4);
+	}
+	else
+	{
+		rotate(a, 1);
+		rotate(b, 1);
+		write(1, "rr\n", 3);
 	}
 }
