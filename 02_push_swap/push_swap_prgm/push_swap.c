@@ -6,19 +6,22 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 18:33:10 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:24:57 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	a_to_b(t_stack *a, t_stack *b);
+void	a_to_b(t_stack *a, t_stack *b, t_cmd *prev, t_cmd *curr, float chunk);
 void	b_to_a(t_stack *a, t_stack *b);
 
 int	main(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
+	t_cmd	prev;
+	t_cmd	curr;
+	float	chunk;
 
 	if (argc == 1)
 		return (0);
@@ -29,85 +32,64 @@ int	main(int argc, char *argv[])
 		sort_small_stack(&a, &b);
 	else
 	{
-		a_to_b(&a, &b);
+		prev = -1;
+		chunk = 0.000000053 * a.len * a.len + 0.03 * a.len + 14.5;
+		a_to_b(&a, &b, &prev, &curr, chunk);
 		b_to_a(&a, &b);
 	}
 	free_list(&a);
 }
 
-void	a_to_b(t_stack *a, t_stack *b)
+void	a_to_b(t_stack *a, t_stack *b, t_cmd *prev, t_cmd *curr, float chunk)
 {
-	t_cmd	prev;
-	t_cmd	curr;
-	float	scale;
-	int		top;
-	int		i;
+	int	top;
+	int	i;
 
-	scale = 0.000000053 * a->len * a->len + 0.03 * a->len + 14.5;
 	i = 0;
-	prev = -1;
 	while (a->len)
 	{
 		top = a->top->idx;
-		if (top <= i + scale)
+		if (top <= i + chunk)
 		{
-			curr = PB;
+			*curr = PB;
 			if (i < top)
 			{
 				optimize_cmd(a, b, prev, curr);
-				prev = curr;
-				curr = RB;
+				*curr = RB;
 			}
 			i++;
 		}
-		else if (top > i + scale)
-		{
+		else
 			if (i < a->len / 2 && i >= 0)
-				curr = RRA;
+				*curr = RRA;
 			else
-				curr = RA;
-		}
+				*curr = RA;
 		optimize_cmd(a, b, prev, curr);
-		prev = curr;
 	}
-}
-
-int	get_big_idx(t_stack *stack)
-{
-	t_list	*tmp;
-	int		i;
-
-	tmp = stack->top;
-	i = 0;
-	while (1)
-	{
-		if (tmp->idx == stack->len - 1)
-			break ;
-		tmp = tmp->next;
-		i++;
-	}
-	return (i);
 }
 
 void	b_to_a(t_stack *a, t_stack *b)
 {
-	int	big_idx;
-	int	mid;
+	t_list	*tmp;
+	int		big_idx;
+	int		mid;
 
 	while (b->len)
 	{
-		big_idx = get_big_idx(b);
+		tmp = b->top;
+		big_idx = 0;
+		while (tmp->idx != b->len - 1)
+		{
+			big_idx++;
+			tmp = tmp->next;
+		}
 		mid = b->len / 2;
 		if (big_idx > mid)
-		{
 			while (big_idx++ < b->len)
 				execute_cmd(a, b, RRB);
-		}
 		else if (big_idx <= mid)
-		{
 			while (big_idx-- > 0)
 				execute_cmd(a, b, RB);
-		}
 		execute_cmd(a, b, PA);
 	}
 }
