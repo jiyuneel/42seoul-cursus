@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:11:11 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 14:57:38 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:21:53 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 		return (0);
 	stack_init(&a, &b, ++argv);
-	if (is_sorted(&a))
-		return (0);
 	while (1)
 	{
 		cmd = get_next_line(0);
