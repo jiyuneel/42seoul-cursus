@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:54:33 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 18:36:27 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:23:21 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,29 @@ void	sort_three(t_stack *a, t_stack *b)
 	}
 }
 
+void	push_small(t_stack *a, t_stack *b, int idx)
+{
+	t_list	*tmp;
+	int		push_idx;
+	int		mid;
+
+	tmp = a->top;
+	push_idx = 0;
+	while (tmp->idx != idx)
+	{
+		push_idx++;
+		tmp = tmp->next;
+	}
+	mid = a->len / 2;
+	if (push_idx > mid)
+		while (push_idx++ < a->len)
+			execute_cmd(a, b, RRA);
+	else if (push_idx <= mid)
+		while (push_idx-- > 0)
+			execute_cmd(a, b, RA);
+	execute_cmd(a, b, PB);
+}
+
 void	sort_small_stack(t_stack *a, t_stack *b)
 {
 	int	len;
@@ -87,4 +110,13 @@ void	sort_small_stack(t_stack *a, t_stack *b)
 		execute_cmd(a, b, SA);
 	else if (a->len == 3)
 		sort_three(a, b);
+	else
+	{
+		len = a->len;
+		while (a->len != 3)
+			push_small(a, b, len - a->len);
+		sort_three(a, b);
+		while (b->len != 0)
+			execute_cmd(a, b, PA);
+	}
 }
