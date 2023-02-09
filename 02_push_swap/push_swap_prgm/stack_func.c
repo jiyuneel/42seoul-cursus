@@ -6,31 +6,39 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/08 03:29:16 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:47:36 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*pop(t_stack *stack)
+void	swap(t_stack *stack)
 {
-	t_list	*node;
+	t_list	*top;
+	int		tmp;
 
-	node = stack->top;
-	node->prev->next = node->next;
-	stack->top = stack->top->next;
-	stack->top->prev = node->prev;
-	stack->len--;
-	if (stack->len == 0)
-		stack->top = NULL;
-	return (node);
+	if (stack->len < 2)
+		return ;
+	top = stack->top;
+	tmp = top->val;
+	top->val = top->next->val;
+	top->next->val = tmp;
 }
 
 void	push(t_stack *from, t_stack *to)
 {
+	t_list	*pop;
+
 	if (from->len == 0)
 		return ;
-	lstadd_back(to, pop(from));
+	pop = from->top;
+	pop->prev->next = pop->next;
+	from->top = from->top->next;
+	from->top->prev = pop->prev;
+	from->len--;
+	if (from->len == 0)
+		from->top = NULL;
+	lstadd_back(to, pop);
 	to->top = to->top->prev;
 	if (to->name == 'a')
 		write(1, "pa\n", 3);

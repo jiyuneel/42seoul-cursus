@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 16:22:42 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:44:03 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	lstadd_back(t_stack *stack, t_list *new);
 void	free_list(t_stack *stack);
 void	check_error(t_stack *stack, char *arg_str, long long arg_int);
 void	error_exit(t_stack *stack);
+void	swap(t_stack *stack);
 void	push(t_stack *from, t_stack *to);
 void	rotate(t_stack *stack, int both);
 void	rev_rotate(t_stack *stack, int both);
