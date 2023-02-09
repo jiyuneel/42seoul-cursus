@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 16:47:36 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/09 17:10:07 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	swap(t_stack *stack)
 	tmp = top->val;
 	top->val = top->next->val;
 	top->next->val = tmp;
+	if (stack->name == 'a')
+		write(1, "sa\n", 3);
+	else if (stack->name == 'b')
+		write(1, "sb\n", 3);
 }
 
 void	push(t_stack *from, t_stack *to)
