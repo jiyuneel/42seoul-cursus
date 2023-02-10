@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:20:23 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 14:57:09 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:41:01 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 	b->len = 0;
 	b->top = NULL;
 	b->name = 'b';
-
 	if (!argv)
 		error_exit(a);
 	while (*argv)
