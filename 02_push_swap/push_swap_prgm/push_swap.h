@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 03:50:30 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:04:12 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_list	*lstnew(int val);
 void	lstadd_back(t_stack *stack, t_list *new);
 void	free_list(t_stack *stack);
 void	check_error(t_stack *stack, char *arg_str, long long arg_int);
-void	error_exit(t_stack *stack);
+void	error_exit(t_stack *stack1, t_stack *stack2, t_cmdset *head);
 void	swap(t_stack *stack);
 void	push(t_stack *from, t_stack *to);
 void	rotate(t_stack *stack);

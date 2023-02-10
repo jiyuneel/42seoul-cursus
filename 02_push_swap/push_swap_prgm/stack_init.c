@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/10 23:24:11 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:04:59 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ void	stack_push(t_stack *stack, char **arr)
 	t_list		*new;
 
 	if (!arr || !*arr)
-		error_exit(stack);
+		error_exit(stack, NULL, NULL);
 	while (*arr)
 	{
 		argval = to_integer(*arr);
 		check_error(stack, *arr, argval);
 		new = lstnew(argval);
 		if (!new)
-			error_exit(stack);
+			error_exit(stack, NULL, NULL);
 		lstadd_back(stack, new);
 		arr++;
 	}

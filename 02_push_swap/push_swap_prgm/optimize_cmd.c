@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:54:33 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 03:16:09 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:04:26 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 void	execute_and_add(t_stack *a, t_stack *b, t_cmdset **head, t_cmd cmd)
 {
+	t_cmdset	*new;
+
+	new = cmdnew(cmd);
+	if (!new)
+		error_exit(a, b, *head);
 	execute_cmd(a, b, cmd);
-	cmdadd_back(head, cmdnew(cmd));
+	cmdadd_back(head, new);
 }
 
 void	sort_three(t_stack *a, t_stack *b, t_cmdset **head)
