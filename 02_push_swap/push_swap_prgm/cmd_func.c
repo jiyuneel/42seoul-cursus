@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 21:53:06 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/10 23:41:25 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:50:20 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,21 @@ void	cmdadd_back(t_cmdset **head, t_cmdset *new)
 		(*head)->prev->next = new;
 		(*head)->prev = new;
 		new->next = *head;
+	}
+}
+
+void	free_cmdset(t_cmdset *head)
+{
+	t_cmdset	*tmp;
+
+	while (1)
+	{
+		tmp = head;
+		head = tmp->next;
+		head->prev = tmp->prev;
+		tmp->prev->next = head;
+		free(tmp);
+		if (tmp->next == tmp)
+			break ;
 	}
 }

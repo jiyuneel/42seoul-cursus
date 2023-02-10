@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 03:23:35 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:53:19 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head);
 void	b_to_a(t_stack *a, t_stack *b, t_cmdset **head);
 
+// void check_leak() {
+// 	system("leaks -quiet push_swap");
+// }
+
 int	main(int argc, char *argv[])
 {
 	t_stack		a;
@@ -22,6 +26,7 @@ int	main(int argc, char *argv[])
 	t_cmdset	*head;
 	t_cmdset	*tmp;
 
+	// atexit(check_leak);
 	stack_init(&a, &b, ++argv);
 	if (argc == 1 || is_sorted(&a))
 		return (0);
@@ -42,7 +47,7 @@ int	main(int argc, char *argv[])
 			break ;
 	}
 	free_list(&a);
-	// free_cmdset(head);
+	free_cmdset(head);
 }
 
 void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head)
