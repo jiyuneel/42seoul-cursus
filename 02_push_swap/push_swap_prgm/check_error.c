@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:30:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 14:42:45 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/10 23:38:33 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	check_duplicate(t_stack *stack, int val)
 
 void	error_exit(t_stack *stack)
 {
-	free_list(stack);
+	if (stack)
+		free_list(stack);
 	write(2, "Error\n", 6);
 	exit(1);
 }

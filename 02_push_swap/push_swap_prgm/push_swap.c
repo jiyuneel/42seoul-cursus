@@ -6,136 +6,82 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/10 19:34:11 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:23:35 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	a_to_b(t_stack *a, t_stack *b, t_cmd *prev, t_cmd *curr);
-void	b_to_a(t_stack *a, t_stack *b);
+void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head);
+void	b_to_a(t_stack *a, t_stack *b, t_cmdset **head);
 
 int	main(int argc, char *argv[])
 {
-	t_stack	a;
-	t_stack	b;
-	t_cmd	prev;
-	t_cmd	curr;
+	t_stack		a;
+	t_stack		b;
+	t_cmdset	*head;
+	t_cmdset	*tmp;
 
-	if (argc == 1)
-		return (0);
 	stack_init(&a, &b, ++argv);
-	if (is_sorted(&a))
+	if (argc == 1 || is_sorted(&a))
 		return (0);
+	head = NULL;
 	if (a.len <= 5)
-		sort_small_stack(&a, &b);
+		sort_small_stack(&a, &b, &head);
 	else
 	{
-		prev = -1;
-		a_to_b(&a, &b, &prev, &curr);
-		b_to_a(&a, &b);
+		a_to_b(&a, &b, &head);
+		b_to_a(&a, &b, &head);
+	}
+	tmp = head;
+	while (1)
+	{
+		print_cmd(tmp->cmd);
+		tmp = tmp->next;
+		if (tmp == head)
+			break ;
 	}
 	free_list(&a);
+	// free_cmdset(head);
 }
 
-// void	a_to_b(t_stack *a, t_stack *b, t_cmd *prev, t_cmd *curr)
-// {
-// 	int		top;
-// 	int		n;
-// 	float	chunk;
-// 	int		r;
-// 	t_list	*tmp;
-
-// 	chunk = 0.000000053 * a->len * a->len + 0.03 * a->len + 14.5;
-// 	n = 0;
-// 	while (a->len)
-// 	{
-// 		top = a->top->idx;
-// 		//rotate_a(a, b, n, chunk, prev, curr);
-// 		r = 0;
-// 		tmp = a->top;
-// 		while (tmp->idx > n + chunk)
-// 		{
-// 			r++;
-// 			tmp = tmp->next;
-// 		}
-// 		if (r > a->len / 2)
-// 		{
-// 			*curr = RRA;
-// 			while (r++ < a->len)
-// 				//execute_cmd(a, b, RRA);
-// 				optimize_cmd(a, b, prev, curr);
-// 		}
-// 		else
-// 		{
-// 			*curr = RA;
-// 			while (r-- > 0)
-// 				//execute_cmd(a, b, RA);
-// 				optimize_cmd(a, b, prev, curr);
-// 		}
-// 		if (top <= n + chunk)
-// 		{
-// 			*curr = PB;
-// 			if (n < top)
-// 			{
-// 				optimize_cmd(a, b, prev, curr);
-// 				*curr = RB;
-// 			}
-// 			n++;
-// 			optimize_cmd(a, b, prev, curr);
-// 		}
-// 	}
-// }
-
-int	rotate_num(t_stack *a, int n, float chunk)
+void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head)
 {
-	int		times;
-	t_list	*tmp;
-
-	times = 0;
-	tmp = a->top;
-	while (tmp->idx > n + chunk)
-	{
-		times++;
-		tmp = tmp->next;
-	}
-	return (times);
-}
-
-void	a_to_b(t_stack *a, t_stack *b, t_cmd *prev, t_cmd *curr)
-{
+	int		top;
 	int		n;
 	float	chunk;
-	int		times;
+	int		r;
+	t_list	*tmp;
 
 	chunk = 0.000000053 * a->len * a->len + 0.03 * a->len + 14.5;
 	n = 0;
 	while (a->len)
 	{
-		times = rotate_num(a, n, chunk);
-		if (times > a->len / 2)
+		r = 0;
+		tmp = a->top;
+		while (tmp->idx > n + chunk)
 		{
-			*curr = RRA;
-			while (times++ < a->len)
-				optimize_cmd(a, b, prev, curr);
+			r++;
+			tmp = tmp->next;
 		}
+		if (r > a->len / 2)
+			while (r++ < a->len)
+				execute_and_add(a, b, head, RRA);
 		else
+			while (r-- > 0)
+				execute_and_add(a, b, head, RA);
+		top = a->top->idx;
+		if (top <= n + chunk)
 		{
-			*curr = RA;
-			while (times-- > 0)
-				optimize_cmd(a, b, prev, curr);
+			execute_and_add(a, b, head, PB);
+			if (n < top)
+				execute_and_add(a, b, head, RB);
+			n++;
 		}
-		*curr = PB;
-		if (n++ < a->top->idx)
-		{
-			optimize_cmd(a, b, prev, curr);
-			*curr = RB;
-		}
-		optimize_cmd(a, b, prev, curr);
 	}
 }
 
-void	b_to_a(t_stack *a, t_stack *b)
+void	b_to_a(t_stack *a, t_stack *b, t_cmdset **head)
 {
 	t_list	*tmp;
 	int		big_idx;
@@ -153,10 +99,10 @@ void	b_to_a(t_stack *a, t_stack *b)
 		mid = b->len / 2;
 		if (big_idx > mid)
 			while (big_idx++ < b->len)
-				execute_cmd(a, b, RRB);
+				execute_and_add(a, b, head, RRB);
 		else if (big_idx <= mid)
 			while (big_idx-- > 0)
-				execute_cmd(a, b, RB);
-		execute_cmd(a, b, PA);
+				execute_and_add(a, b, head, RB);
+		execute_and_add(a, b, head, PA);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:26:20 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 17:10:07 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/10 22:34:28 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	swap(t_stack *stack)
 	tmp = top->val;
 	top->val = top->next->val;
 	top->next->val = tmp;
-	if (stack->name == 'a')
-		write(1, "sa\n", 3);
-	else if (stack->name == 'b')
-		write(1, "sb\n", 3);
 }
 
 void	push(t_stack *from, t_stack *to)
@@ -44,52 +40,32 @@ void	push(t_stack *from, t_stack *to)
 		from->top = NULL;
 	lstadd_back(to, pop);
 	to->top = to->top->prev;
-	if (to->name == 'a')
-		write(1, "pa\n", 3);
-	else if (to->name == 'b')
-		write(1, "pb\n", 3);
 }
 
-void	rotate(t_stack *stack, int both)
+void	rotate(t_stack *stack)
 {
 	if (stack->len < 2)
 		return ;
 	stack->top = stack->top->next;
-	if (!both)
-	{
-		if (stack->name == 'a')
-			write(1, "ra\n", 3);
-		else if (stack->name == 'b')
-			write(1, "rb\n", 3);
-	}
 }
 
-void	rev_rotate(t_stack *stack, int both)
+void	rev_rotate(t_stack *stack)
 {
 	if (stack->len < 2)
 		return ;
 	stack->top = stack->top->prev;
-	if (!both)
-	{
-		if (stack->name == 'a')
-			write(1, "rra\n", 4);
-		else if (stack->name == 'b')
-			write(1, "rrb\n", 4);
-	}
 }
 
 void	rotate_both(t_stack *a, t_stack *b, int reverse)
 {
 	if (reverse)
 	{
-		rev_rotate(a, 1);
-		rev_rotate(b, 1);
-		write(1, "rrr\n", 4);
+		rev_rotate(a);
+		rev_rotate(b);
 	}
 	else
 	{
-		rotate(a, 1);
-		rotate(b, 1);
-		write(1, "rr\n", 3);
+		rotate(a);
+		rotate(b);
 	}
 }

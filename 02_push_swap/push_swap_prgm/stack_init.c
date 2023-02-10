@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/10 19:35:07 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/10 23:24:11 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 	b->len = 0;
 	b->top = NULL;
 	b->name = 'b';
-	if (!argv)
-		error_exit(a);
+	if (!*argv)
+		return ;
 	while (*argv)
 	{
 		arr = split_space(*argv);
