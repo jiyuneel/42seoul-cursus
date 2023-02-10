@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 03:53:19 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:15:25 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char *argv[])
 	t_stack		a;
 	t_stack		b;
 	t_cmdset	*head;
-	t_cmdset	*tmp;
 
 	// atexit(check_leak);
 	stack_init(&a, &b, ++argv);
@@ -38,14 +37,7 @@ int	main(int argc, char *argv[])
 		a_to_b(&a, &b, &head);
 		b_to_a(&a, &b, &head);
 	}
-	tmp = head;
-	while (1)
-	{
-		print_cmd(tmp->cmd);
-		tmp = tmp->next;
-		if (tmp == head)
-			break ;
-	}
+	print_cmdset(head);
 	free_list(&a);
 	free_cmdset(head);
 }

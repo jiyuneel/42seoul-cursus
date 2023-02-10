@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 04:04:12 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:13:54 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void	cmdadd_back(t_cmdset **head, t_cmdset *new);
 void	print_cmd(t_cmd cmd);
 void	execute_and_add(t_stack *a, t_stack *b, t_cmdset **head, t_cmd cmd);
 void	free_cmdset(t_cmdset *head);
+void	print_cmdset(t_cmdset *head);
 
 #endif

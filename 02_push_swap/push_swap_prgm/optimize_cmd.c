@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:54:33 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 04:04:26 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:18:29 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,24 @@ void	sort_small_stack(t_stack *a, t_stack *b, t_cmdset **head)
 		sort_three(a, b, head);
 		while (b->len != 0)
 			execute_and_add(a, b, head, PA);
+	}
+}
+
+void	print_cmdset(t_cmdset *head)
+{
+	t_cmdset	*tmp;
+
+	tmp = head;
+	while (1)
+	{
+		if (tmp->cmd == RB && tmp->next->cmd == RA)
+		{
+			print_cmd(RR);
+			tmp = tmp->next->next;
+		}
+		print_cmd(tmp->cmd);
+		tmp = tmp->next;
+		if (tmp == head)
+			break ;
 	}
 }
