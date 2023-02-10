@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/09 18:46:03 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/10 23:14:35 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ typedef enum e_cmd
 	RRR
 }	t_cmd;
 
-void	sort_small_stack(t_stack *a, t_stack *b);
+typedef struct s_cmdset
+{
+	enum e_cmd		cmd;
+	struct s_cmdset	*prev;
+	struct s_cmdset	*next;
+}	t_cmdset;
+
+void	sort_small_stack(t_stack *a, t_stack *b, t_cmdset **head);
 char	**split_space(char const *s);
 char	**free_arr(char **arr);
 void	stack_init(t_stack *a, t_stack *b, char **argv);
@@ -61,10 +68,9 @@ void	check_error(t_stack *stack, char *arg_str, long long arg_int);
 void	error_exit(t_stack *stack);
 void	swap(t_stack *stack);
 void	push(t_stack *from, t_stack *to);
-void	rotate(t_stack *stack, int both);
-void	rev_rotate(t_stack *stack, int both);
+void	rotate(t_stack *stack);
+void	rev_rotate(t_stack *stack);
 void	rotate_both(t_stack *a, t_stack *b, int reverse);
-void	optimize_cmd(t_stack *a, t_stack *b, t_cmd *prev, t_cmd *curr);
 void	execute_cmd(t_stack *a, t_stack *b, t_cmd cmd);
 
 #endif
