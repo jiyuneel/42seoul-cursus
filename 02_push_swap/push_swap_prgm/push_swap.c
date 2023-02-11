@@ -6,13 +6,13 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 04:15:25 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:54:41 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head);
+void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head, float chunk);
 void	b_to_a(t_stack *a, t_stack *b, t_cmdset **head);
 
 // void check_leak() {
@@ -24,6 +24,7 @@ int	main(int argc, char *argv[])
 	t_stack		a;
 	t_stack		b;
 	t_cmdset	*head;
+	float		chunk;
 
 	// atexit(check_leak);
 	stack_init(&a, &b, ++argv);
@@ -34,7 +35,8 @@ int	main(int argc, char *argv[])
 		sort_small_stack(&a, &b, &head);
 	else
 	{
-		a_to_b(&a, &b, &head);
+		chunk = 0.000000053 * a.len * a.len + 0.03 * a.len + 14.5;
+		a_to_b(&a, &b, &head, chunk);
 		b_to_a(&a, &b, &head);
 	}
 	print_cmdset(head);
@@ -42,38 +44,46 @@ int	main(int argc, char *argv[])
 	free_cmdset(head);
 }
 
-void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head)
+int	count_rotate(t_stack *a, int n, float chunk)
+{
+	int		cnt;
+	t_list	*tmp;
+
+	cnt = 0;
+	tmp = a->top;
+	while (tmp->idx > n + chunk)
+	{
+		cnt++;
+		tmp = tmp->next;
+	}
+	return (cnt);
+}
+
+void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head, float chunk)
 {
 	int		top;
 	int		n;
-	float	chunk;
-	int		r;
-	t_list	*tmp;
+	int		cnt;
 
-	chunk = 0.000000053 * a->len * a->len + 0.03 * a->len + 14.5;
 	n = 0;
 	while (a->len)
 	{
-		r = 0;
-		tmp = a->top;
-		while (tmp->idx > n + chunk)
-		{
-			r++;
-			tmp = tmp->next;
-		}
-		if (r > a->len / 2)
-			while (r++ < a->len)
-				execute_and_add(a, b, head, RRA);
-		else
-			while (r-- > 0)
-				execute_and_add(a, b, head, RA);
 		top = a->top->idx;
 		if (top <= n + chunk)
 		{
 			execute_and_add(a, b, head, PB);
-			if (n < top)
+			if (n++ < top)
 				execute_and_add(a, b, head, RB);
-			n++;
+		}
+		else if (top > n + chunk)
+		{
+			cnt = count_rotate(a, n, chunk);
+			if (cnt <= a->len / 2)
+				while (cnt-- > 0)
+					execute_and_add(a, b, head, RA);
+			else
+				while (cnt++ < a->len)
+					execute_and_add(a, b, head, RRA);
 		}
 	}
 }
@@ -82,7 +92,6 @@ void	b_to_a(t_stack *a, t_stack *b, t_cmdset **head)
 {
 	t_list	*tmp;
 	int		big_idx;
-	int		mid;
 
 	while (b->len)
 	{
@@ -93,13 +102,12 @@ void	b_to_a(t_stack *a, t_stack *b, t_cmdset **head)
 			big_idx++;
 			tmp = tmp->next;
 		}
-		mid = b->len / 2;
-		if (big_idx > mid)
-			while (big_idx++ < b->len)
-				execute_and_add(a, b, head, RRB);
-		else if (big_idx <= mid)
+		if (big_idx <= b->len / 2)
 			while (big_idx-- > 0)
 				execute_and_add(a, b, head, RB);
+		else
+			while (big_idx++ < b->len)
+				execute_and_add(a, b, head, RRB);
 		execute_and_add(a, b, head, PA);
 	}
 }

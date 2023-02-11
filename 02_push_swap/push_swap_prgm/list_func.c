@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 02:13:02 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/05 16:29:26 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:09:55 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ t_list	*lstnew(int val)
 
 void	lstadd_back(t_stack *stack, t_list *new)
 {
-	if (!stack || !new)
-		return ;
 	if (!stack->top)
 	{
 		new->next = new;
@@ -61,17 +59,14 @@ int	is_sorted(t_stack *stack)
 {
 	t_list	*tmp;
 	int		i;
-	int		val;
 
 	i = 0;
 	tmp = stack->top;
-	while (i < stack->len - 1)
+	while (i++ < stack->len - 1)
 	{
-		val = tmp->val;
-		if (val > tmp->next->val)
+		if (tmp->val > tmp->next->val)
 			return (0);
 		tmp = tmp->next;
-		i++;
 	}
 	return (1);
 }

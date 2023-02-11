@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 14:25:31 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 04:04:59 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:05:30 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,25 @@ long long	to_integer(const char *str)
 		str++;
 	}
 	return (sign * num);
+}
+
+void	stack_push(t_stack *stack, char **arr)
+{
+	long long	argval;
+	t_list		*new;
+
+	if (!arr || !*arr)
+		error_exit(stack, NULL, NULL);
+	while (*arr)
+	{
+		argval = to_integer(*arr);
+		check_error(stack, *arr, argval);
+		new = lstnew(argval);
+		if (!new)
+			error_exit(stack, NULL, NULL);
+		lstadd_back(stack, new);
+		arr++;
+	}
 }
 
 void	set_idx(t_stack *stack)
@@ -59,37 +78,18 @@ void	set_idx(t_stack *stack)
 	}
 }
 
-void	stack_push(t_stack *stack, char **arr)
-{
-	long long	argval;
-	t_list		*new;
-
-	if (!arr || !*arr)
-		error_exit(stack, NULL, NULL);
-	while (*arr)
-	{
-		argval = to_integer(*arr);
-		check_error(stack, *arr, argval);
-		new = lstnew(argval);
-		if (!new)
-			error_exit(stack, NULL, NULL);
-		lstadd_back(stack, new);
-		arr++;
-	}
-}
-
 void	stack_init(t_stack *a, t_stack *b, char **argv)
 {
 	char	**arr;
 
+	if (!*argv)
+		return ;
 	a->len = 0;
 	a->top = NULL;
 	a->name = 'a';
 	b->len = 0;
 	b->top = NULL;
 	b->name = 'b';
-	if (!*argv)
-		return ;
 	while (*argv)
 	{
 		arr = split_space(*argv);

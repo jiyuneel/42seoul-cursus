@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:05:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 04:13:54 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:02:15 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,31 @@ typedef struct s_cmdset
 	struct s_cmdset	*next;
 }	t_cmdset;
 
-void	sort_small_stack(t_stack *a, t_stack *b, t_cmdset **head);
-char	**split_space(char const *s);
-char	**free_arr(char **arr);
-void	stack_init(t_stack *a, t_stack *b, char **argv);
-int		is_sorted(t_stack *stack);
-t_list	*lstnew(int val);
-void	lstadd_back(t_stack *stack, t_list *new);
-void	free_list(t_stack *stack);
-void	check_error(t_stack *stack, char *arg_str, long long arg_int);
-void	error_exit(t_stack *stack1, t_stack *stack2, t_cmdset *head);
-void	swap(t_stack *stack);
-void	push(t_stack *from, t_stack *to);
-void	rotate(t_stack *stack);
-void	rev_rotate(t_stack *stack);
-void	rotate_both(t_stack *a, t_stack *b, int reverse);
-void	execute_cmd(t_stack *a, t_stack *b, t_cmd cmd);
+void		stack_init(t_stack *a, t_stack *b, char **argv);
+char		**split_space(char const *s);
+char		**free_arr(char **arr);
+int			is_sorted(t_stack *stack);
+void		sort_small_stack(t_stack *a, t_stack *b, t_cmdset **head);
+void		print_cmd(t_cmd cmd);
+void		print_cmdset(t_cmdset *head);
+
+t_list		*lstnew(int val);
+void		lstadd_back(t_stack *stack, t_list *new);
+void		free_list(t_stack *stack);
+
 t_cmdset	*cmdnew(t_cmd cmd);
-void	cmdadd_back(t_cmdset **head, t_cmdset *new);
-void	print_cmd(t_cmd cmd);
-void	execute_and_add(t_stack *a, t_stack *b, t_cmdset **head, t_cmd cmd);
-void	free_cmdset(t_cmdset *head);
-void	print_cmdset(t_cmdset *head);
+void		cmdadd_back(t_cmdset **head, t_cmdset *new);
+void		execute_cmd(t_stack *a, t_stack *b, t_cmd cmd);
+void		execute_and_add(t_stack *a, t_stack *b, t_cmdset **head, t_cmd cmd);
+void		free_cmdset(t_cmdset *head);
+
+void		check_error(t_stack *stack, char *arg_str, long long arg_int);
+void		error_exit(t_stack *stack1, t_stack *stack2, t_cmdset *head);
+
+void		swap(t_stack *stack);
+void		push(t_stack *from, t_stack *to);
+void		rotate(t_stack *stack);
+void		rev_rotate(t_stack *stack);
+void		rotate_both(t_stack *a, t_stack *b, int reverse);
 
 #endif
