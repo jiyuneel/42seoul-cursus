@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:11:11 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/10 02:21:53 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:49:32 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,13 @@ void	execute_cmd2(t_stack *a, t_stack *b, char *cmd)
 	else if (!ft_strcmp(cmd, "rb\n"))
 		rotate(b);
 	else if (!ft_strcmp(cmd, "rr\n"))
-	{
-		rotate(a);
-		rotate(b);
-	}
+		rotate_both(a, b, 0);
 	else if (!ft_strcmp(cmd, "rra\n"))
 		rev_rotate(a);
 	else if (!ft_strcmp(cmd, "rrb\n"))
 		rev_rotate(b);
 	else if (!ft_strcmp(cmd, "rrr\n"))
-	{
-		rev_rotate(a);
-		rev_rotate(b);
-	}
+		rotate_both(a, b, 1);
 	else
-	{
-		free_list(a);
-		free_list(b);
-		error_exit(NULL);
-	}
+		error_exit(a, b);
 }

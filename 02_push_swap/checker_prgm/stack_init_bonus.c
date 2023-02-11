@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:20:23 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/10 14:41:01 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:47:59 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	stack_push(t_stack *stack, char **arr)
 	t_list		*new;
 
 	if (!arr || !*arr)
-		error_exit(stack);
+		error_exit(stack, NULL);
 	while (*arr)
 	{
 		argval = to_integer(*arr);
 		check_error(stack, *arr, argval);
 		new = lstnew(argval);
 		if (!new)
-			error_exit(stack);
+			error_exit(stack, NULL);
 		lstadd_back(stack, new);
 		arr++;
 	}
@@ -56,14 +56,14 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 {
 	char	**arr;
 
+	if (!*argv)
+		return ;
 	a->len = 0;
 	a->top = NULL;
 	a->name = 'a';
 	b->len = 0;
 	b->top = NULL;
 	b->name = 'b';
-	if (!argv)
-		error_exit(a);
 	while (*argv)
 	{
 		arr = split_space(*argv);

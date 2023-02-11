@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:23:50 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 14:56:47 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:20:17 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@ int	check_duplicate(t_stack *stack, int val)
 	return (1);
 }
 
-void	error_exit(t_stack *stack)
+void	error_exit(t_stack *stack1, t_stack *stack2)
 {
-	free_list(stack);
+	if (stack1)
+		free_list(stack1);
+	if (stack2)
+		free_list(stack2);
 	write(2, "Error\n", 6);
 	exit(1);
 }
@@ -67,5 +70,5 @@ void	check_error(t_stack *stack, char *arg_str, long long arg_int)
 {
 	if (!check_digit(arg_str) || !check_range(arg_str, arg_int)
 		|| !check_duplicate(stack, arg_int))
-		error_exit(stack);
+		error_exit(stack, NULL);
 }

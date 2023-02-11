@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 03:18:40 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/07 14:56:34 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:09:15 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,21 @@ typedef struct s_stack
 }	t_stack;
 
 void	stack_init(t_stack *a, t_stack *b, char **argv);
-void	error_exit(t_stack *stack);
-void	check_error(t_stack *stack, char *arg_str, long long arg_int);
-void	free_list(t_stack *stack);
-char	**free_arr(char **arr);
 char	**split_space(char const *s);
+char	**free_arr(char **arr);
+int		is_sorted(t_stack *stack);
+
 t_list	*lstnew(int val);
 void	lstadd_back(t_stack *stack, t_list *new);
-int		is_sorted(t_stack *stack);
+void	free_list(t_stack *stack);
+
+void	check_error(t_stack *stack, char *arg_str, long long arg_int);
+void	error_exit(t_stack *stack1, t_stack *stack2);
+
 void	swap(t_stack *stack);
 void	push(t_stack *from, t_stack *to);
 void	rotate(t_stack *stack);
 void	rev_rotate(t_stack *stack);
+void	rotate_both(t_stack *a, t_stack *b, int reverse);
 
 #endif
