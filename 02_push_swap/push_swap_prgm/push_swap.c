@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/12 08:28:08 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:26:17 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	main(int argc, char *argv[])
 
 	stack_init(&a, &b, ++argv);
 	if (argc == 1 || is_sorted(&a))
+	{
+		free_list(&a);
 		return (0);
+	}
 	head = NULL;
 	if (a.len <= 5)
 		sort_small_stack(&a, &b, &head);
