@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:11:11 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 16:49:32 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:26:35 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char *argv[])
 		if (!cmd)
 			break ;
 		execute_cmd(&a, &b, cmd);
+		free(cmd);
 	}
 	if (is_sorted(&a) && !b.len)
 		write(1, "OK\n", 3);
