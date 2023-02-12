@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 06:03:48 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 15:54:41 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/12 08:28:08 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 void	a_to_b(t_stack *a, t_stack *b, t_cmdset **head, float chunk);
 void	b_to_a(t_stack *a, t_stack *b, t_cmdset **head);
 
-// void check_leak() {
-// 	system("leaks -quiet push_swap");
-// }
-
 int	main(int argc, char *argv[])
 {
 	t_stack		a;
@@ -26,7 +22,6 @@ int	main(int argc, char *argv[])
 	t_cmdset	*head;
 	float		chunk;
 
-	// atexit(check_leak);
 	stack_init(&a, &b, ++argv);
 	if (argc == 1 || is_sorted(&a))
 		return (0);

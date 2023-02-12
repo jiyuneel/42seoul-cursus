@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:54:33 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 15:28:05 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/12 08:27:39 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	sort_three(t_stack *a, t_stack *b, t_cmdset **head)
 	val1 = a->top->val;
 	val2 = a->top->next->val;
 	val3 = a->top->prev->val;
-
 	if (val2 < val1 && val1 < val3)
 		execute_and_add(a, b, head, SA);
 	else if (val2 < val3 && val3 < val1)
