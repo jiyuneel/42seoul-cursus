@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:30:35 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/11 04:03:57 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:58:21 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int	check_range(char *str, long long num)
 	len = 0;
 	while (str[len])
 		len++;
-	if (len > 11 || num < INT_MIN || num > INT_MAX)
+	if (num < 0 && len >= 11 && num < INT_MIN)
+		return (0);
+	if (num >= 0 && len >= 10 && num > INT_MAX)
 		return (0);
 	return (1);
 }
