@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:11:11 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/12 14:26:35 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/15 23:23:22 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "checker.h"
 
 void	execute_cmd(t_stack *a, t_stack *b, char *cmd);
 void	execute_cmd2(t_stack *a, t_stack *b, char *cmd);
