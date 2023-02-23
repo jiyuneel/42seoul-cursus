@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:34:54 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/20 00:05:19 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/23 23:46:58 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ void	ft_putnbr_fd(int n, int fd)
 	print_nbr(num, fd);
 }
 
-static int	ft_isblank(char c)
-{
-	if ((9 <= c && c <= 13) || c == ' ')
-		return (1);
-	return (0);
-}
-
 int	ft_atoi(const char *str)
 {
 	long long	num;
@@ -70,8 +63,6 @@ int	ft_atoi(const char *str)
 
 	num = 0;
 	sign = 1;
-	while (ft_isblank(*str))
-		str++;
 	if (*str == '+')
 		str++;
 	else if (*str == '-')
