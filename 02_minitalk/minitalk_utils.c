@@ -6,21 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:34:54 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/23 23:46:58 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:18:00 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -29,7 +19,12 @@ void	ft_putchar_fd(char c, int fd)
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	write(fd, s, ft_strlen(s));
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	write(fd, s, len);
 }
 
 void	print_nbr(long long n, int fd)
