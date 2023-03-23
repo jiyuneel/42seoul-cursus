@@ -6,26 +6,30 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:24:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/21 20:39:05 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:44:06 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	receive_signal(int sig);
+void	receive_signal(int sig, siginfo_t *siginfo, void *p);
 
 int	main(int argc, char *argv[])
 {
+	struct sigaction	sig;
+
 	ft_putstr_fd("pid: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
-	signal(SIGUSR1, receive_signal);
-	signal(SIGUSR2, receive_signal);
+	sig.sa_flags = SA_SIGINFO;
+	sig.sa_sigaction = receive_signal;
+	sigaction(SIGUSR1, &sig, NULL);
+	sigaction(SIGUSR2, &sig, NULL);
 	while (1)
 		pause();
 }
 
-void	receive_signal(int sig)
+void	receive_signal(int sig, siginfo_t *siginfo, void *p)
 {
 	static t_signal	signal;
 
@@ -37,7 +41,7 @@ void	receive_signal(int sig)
 	if (signal.bit == 8)
 	{
 		if (signal.chr == 127)
-			ft_putstr_fd("end!!\n", 1);
+			kill(siginfo->si_pid, SIGUSR1);
 		else
 			ft_putchar_fd(signal.chr, 1);
 		signal.bit = 0;
