@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:24:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/03/23 15:44:06 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:56:24 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	receive_signal(int sig, siginfo_t *siginfo, void *p)
 	signal.bit++;
 	if (signal.bit == 8)
 	{
-		if (signal.chr == 127)
+		if (signal.chr == '\0')
 			kill(siginfo->si_pid, SIGUSR1);
 		else
 			ft_putchar_fd(signal.chr, 1);

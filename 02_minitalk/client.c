@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:31:32 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/03/23 15:39:21 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:56:11 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	send_signal(pid_t pid, char *str)
 	while (*str)
 		send_character(pid, *str++);
 	send_character(pid, '\n');
-	send_character(pid, 127);
+	send_character(pid, '\0');
 }
 
 void	receive_message(int sig)
