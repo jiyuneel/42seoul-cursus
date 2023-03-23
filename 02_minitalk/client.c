@@ -6,13 +6,14 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:31:32 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/02/21 20:33:49 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:39:21 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
 void	send_signal(pid_t pid, char *str);
+void	receive_message(int sig);
 
 int	main(int argc, char *argv[])
 {
@@ -24,6 +25,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
+	signal(SIGUSR1, receive_message);
 	send_signal(pid, argv[2]);
 }
 
@@ -50,4 +52,10 @@ void	send_signal(pid_t pid, char *str)
 		send_character(pid, *str++);
 	send_character(pid, '\n');
 	send_character(pid, 127);
+}
+
+void	receive_message(int sig)
+{
+	if (sig == SIGUSR1)
+		exit(0);
 }
