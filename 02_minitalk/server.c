@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:24:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/03/23 15:56:24 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:00:28 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char *argv[])
 {
 	struct sigaction	sig;
 
+	(void)argc, (void)argv;
 	ft_putstr_fd("pid: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
@@ -33,6 +34,7 @@ void	receive_signal(int sig, siginfo_t *siginfo, void *p)
 {
 	static t_signal	signal;
 
+	(void)p;
 	if (sig == SIGUSR1)
 		signal.chr <<= 1;
 	else if (sig == SIGUSR2)
