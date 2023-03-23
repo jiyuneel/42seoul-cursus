@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:24:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/03/23 16:00:28 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:52:37 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	receive_signal(int sig, siginfo_t *siginfo, void *p);
 
-int	main(int argc, char *argv[])
+int	main(void)
 {
 	struct sigaction	sig;
 
-	(void)argc, (void)argv;
 	ft_putstr_fd("pid: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
