@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:31:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/07/30 22:31:10 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/07/30 23:29:33 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,72 @@ void	check_valid_file(int argc, char **argv)
 	}
 }
 
-char	*read_file(char *filename, t_map *m)
+void	get_map_info(char *filename, t_map *m)
 {
 	int		fd;
-	char	buffer[1024];
-	int		len;
-	int		byte;
-	char	*str;
+	char	*line;
+	size_t	len;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		exit(1);
-	len = 0;
 	while (1)
 	{
-		byte = read(fd, buffer, sizeof(buffer));
-		if (byte <= 0)
+		line = get_next_line(fd);
+		if (!line)
 			break ;
-		len += byte;
+		if (!m->width)
+		{
+			len = ft_strlen(line);
+			if (line[len - 1] == '\n')
+				m->width = len - 1;
+			else
+				m->width = len;
+		}
+		m->height++;
+		free(line);
 	}
-	if (byte < 0 || close(fd) < 0)
+	if (close(fd) < 0)
 		exit(1);
-	str = (char *)malloc(sizeof(char) * (len + 1));
+}
+
+char	**free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+	exit(1);
+}
+
+void	get_map(char *filename, t_map *m)
+{
+	int		fd;
+	int		i;
+	char	*line;
+
+	m->map = (char **)malloc(sizeof(char *) * (m->height + 1));
+	if (!m->map)
+		exit(1);
 	fd = open(filename, O_RDONLY);
-	if (!str || fd < 0 || read(fd, str, len) < 0 || close(fd) < 0)
+	if (fd < 0)
 		exit(1);
-	str[len] = '\0';
-	return str;
+	i = 0;
+	while (i < m->height)
+	{
+		line = get_next_line(fd);
+		m->map[i] = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
+		if (!m->map[i])
+			free_arr(m->map);
+		ft_strlcpy(m->map[i], line, ft_strlen(line) + 1);
+		i++;
+		free(line);
+	}
+	m->map[i] = NULL;
+	if (close(fd) < 0)
+		exit(1);
 }
 
 void	check_valid_map(char *filename, t_map *m)
@@ -66,12 +105,9 @@ void	check_valid_map(char *filename, t_map *m)
 	int	i;
 	int	j;
 
-	m->map = ft_split(read_file(filename, m), '\n');
-	if (!m->map)
-		exit(1);
-	i = 0;
-	while (m->map[i])
-		i++;
-	m->height = i;
-	m->width = ft_strlen(m->map[0]);
+	get_map_info(filename, m);
+	// printf("height:%d, width: %d\n", m->height, m->width);
+	get_map(filename, m);
+	// for (i = 0; m->map[i]; i++)
+	// 	printf("%s", m->map[i]);
 }
