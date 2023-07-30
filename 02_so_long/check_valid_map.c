@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:31:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/07/31 00:05:23 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/07/31 04:55:19 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,43 @@ void	check_rectangular(t_map *m)
 		if (ft_strlen(m->map[i]) != m->width)
 		{
 			ft_putstr_fd("Error\nThe map must be rectangular.\n", 1);
-			free_arr(m->map);
+			exit(1);
+			// free_arr(m->map);
+		}
+		i++;
+	}
+}
+
+void	check_surrounded(t_map *m)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < m->height)
+	{
+		if (i == 0 || i == m->height - 1)
+		{
+			j = 0;
+			while (m->map[i][j])
+			{
+				if (m->map[i][j] != '1')
+				{
+					ft_putstr_fd("Error\nThe map must be surrounded by walls.\n", 1);
+					exit(1);
+					// free_arr(m->map);
+				}
+				j++;
+			}
+		}
+		else
+		{
+			if (m->map[i][0] != '1' || m->map[i][m->width - 1] != '1')
+			{
+				ft_putstr_fd("Error\nThe map must be surrounded by walls.\n", 1);
+				exit(1);
+				// free_arr(m->map);
+			}
 		}
 		i++;
 	}
@@ -128,5 +164,5 @@ void	check_valid_map(char *filename, t_map *m)
 	// for (i = 0; m->map[i]; i++)
 	// 	printf("%s\n", m->map[i]);
 	check_rectangular(m);
-	// check_surrounded()
+	check_surrounded(m);
 }
