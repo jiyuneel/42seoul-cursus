@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:31:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/07/30 23:29:33 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/07/31 00:05:23 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	get_map_info(char *filename, t_map *m)
 		exit(1);
 }
 
-char	**free_arr(char **arr)
+void	free_arr(char **arr)
 {
 	int	i;
 
@@ -77,27 +77,44 @@ void	get_map(char *filename, t_map *m)
 	int		fd;
 	int		i;
 	char	*line;
+	size_t	len;
 
 	m->map = (char **)malloc(sizeof(char *) * (m->height + 1));
-	if (!m->map)
-		exit(1);
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (!m->map || fd < 0)
 		exit(1);
 	i = 0;
 	while (i < m->height)
 	{
 		line = get_next_line(fd);
-		m->map[i] = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
+		len = ft_strlen(line);
+		if (line[len - 1] == '\n')
+			len--;
+		m->map[i] = (char *)malloc(sizeof(char) * (len + 1));
 		if (!m->map[i])
 			free_arr(m->map);
-		ft_strlcpy(m->map[i], line, ft_strlen(line) + 1);
-		i++;
+		ft_strlcpy(m->map[i++], line, len + 1);
 		free(line);
 	}
 	m->map[i] = NULL;
 	if (close(fd) < 0)
 		exit(1);
+}
+
+void	check_rectangular(t_map *m)
+{
+	int	i;
+
+	i = 0;
+	while (i < m->height)
+	{
+		if (ft_strlen(m->map[i]) != m->width)
+		{
+			ft_putstr_fd("Error\nThe map must be rectangular.\n", 1);
+			free_arr(m->map);
+		}
+		i++;
+	}
 }
 
 void	check_valid_map(char *filename, t_map *m)
@@ -109,5 +126,7 @@ void	check_valid_map(char *filename, t_map *m)
 	// printf("height:%d, width: %d\n", m->height, m->width);
 	get_map(filename, m);
 	// for (i = 0; m->map[i]; i++)
-	// 	printf("%s", m->map[i]);
+	// 	printf("%s\n", m->map[i]);
+	check_rectangular(m);
+	// check_surrounded()
 }
