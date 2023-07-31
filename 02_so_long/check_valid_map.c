@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:31:12 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/07/31 04:55:19 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:40:50 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,35 @@ void	check_surrounded(t_map *m)
 	}
 }
 
+void	check_component(t_map *m)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < m->height)
+	{
+		j = 0;
+		while (m->map[i][j])
+		{
+			if (m->map[i][j] == 'C')
+				m->c++;
+			else if (m->map[i][j] == 'E')
+				m->e++;
+			else if (m->map[i][j] == 'P')
+				m->p++;
+			else if (m->map[i][j] != '0' && m->map[i][j] != '1')
+			{
+				ft_putstr_fd("Error\nThe map must be composed of only 5 characters(0, 1, C, E, P).\n", 1);
+				exit(1);
+				// free_arr(m->map);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	check_valid_map(char *filename, t_map *m)
 {
 	int	i;
@@ -164,5 +193,6 @@ void	check_valid_map(char *filename, t_map *m)
 	// for (i = 0; m->map[i]; i++)
 	// 	printf("%s\n", m->map[i]);
 	check_rectangular(m);
+	check_component(m);
 	check_surrounded(m);
 }
