@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:34:42 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/07/31 15:35:16 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/03 03:08:18 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,27 @@ void	map_init(char *filename, t_map *m)
 	m->map[i] = NULL;
 	if (close(fd) < 0)
 		exit(EXIT_FAILURE);
+}
+
+void	visited_init(t_map *m)
+{
+	int	i;
+	int	j;
+
+	m->visited = (int **)malloc(sizeof(int *) * m->height);
+	if (!m->visited)
+		exit(EXIT_FAILURE);
+	i = 0;
+	while (i < m->height)
+	{
+		m->visited[i] = (int *)malloc(sizeof(int) * m->width);
+		if (!m->visited[i])
+			exit(EXIT_FAILURE);
+		while (j < m->width)
+		{
+			m->visited[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
 }
