@@ -81,14 +81,9 @@ void	visited_init(t_map *m)
 	i = 0;
 	while (i < m->height)
 	{
-		m->visited[i] = (int *)malloc(sizeof(int) * m->width);
+		m->visited[i] = ft_calloc(m->width, sizeof(int));
 		if (!m->visited[i])
 			exit(EXIT_FAILURE);
-		while (j < m->width)
-		{
-			m->visited[i][j] = 0;
-			j++;
-		}
 		i++;
 	}
 }
