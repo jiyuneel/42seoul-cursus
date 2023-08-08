@@ -6,7 +6,7 @@
 #    By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/05 16:11:17 by jiyunlee          #+#    #+#              #
-#    Updated: 2023/08/06 12:46:28 by jiyunlee         ###   ########.fr        #
+#    Updated: 2023/08/08 16:15:26 by jiyunlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,11 @@ LIB_DIR		= ./libftprintf
 MLX_DIR		= ./mlx
 
 SRCS		= so_long.c \
-			  map_init.c \
-			  check_valid_file.c \
 			  check_valid_map.c \
 			  check_valid_path.c \
-			  display_image.c \
 			  play_game.c \
-			  key_utils.c \
+			  init_map.c \
+			  img_key_utils.c \
 			  get_next_line/get_next_line.c
 OBJS		= ${SRCS:.c=.o}
 
