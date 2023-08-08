@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:34:42 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/03 03:08:18 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:34:00 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_info_init(char *filename, t_map *m)
+void	init_map_info(char *filename, t_map *m)
 {
 	int		fd;
 	char	*line;
@@ -41,7 +41,7 @@ void	map_info_init(char *filename, t_map *m)
 		exit(EXIT_FAILURE);
 }
 
-void	map_init(char *filename, t_map *m)
+void	init_map(char *filename, t_map *m)
 {
 	int		fd;
 	int		i;
@@ -70,10 +70,9 @@ void	map_init(char *filename, t_map *m)
 		exit(EXIT_FAILURE);
 }
 
-void	visited_init(t_map *m)
+void	init_visited(t_map *m)
 {
 	int	i;
-	int	j;
 
 	m->visited = (int **)malloc(sizeof(int *) * m->height);
 	if (!m->visited)
