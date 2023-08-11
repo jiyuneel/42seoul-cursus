@@ -6,7 +6,7 @@
 #    By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 18:39:56 by jiyunlee          #+#    #+#              #
-#    Updated: 2023/08/06 12:42:57 by jiyunlee         ###   ########.fr        #
+#    Updated: 2023/08/11 15:14:54 by jiyunlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME	= libftprintf.a
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	@make -C ./libft bonus
+	@make -C ./libft
 	@cp ${LIBFT} ${NAME}
 	@ar rc ${NAME} ${OBJS}
 

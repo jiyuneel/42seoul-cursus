@@ -6,7 +6,7 @@
 #    By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 15:14:18 by jiyunlee          #+#    #+#              #
-#    Updated: 2022/11/26 21:28:59 by jiyunlee         ###   ########.fr        #
+#    Updated: 2023/08/11 15:14:43 by jiyunlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,22 +22,13 @@ SRCS	= \
 		  ft_atoi.c		ft_calloc.c		ft_strdup.c		ft_substr.c		\
 		  ft_strjoin.c	ft_strtrim.c	ft_split.c		ft_itoa.c		\
 		  ft_strmapi.c	ft_striteri.c	ft_putchar_fd.c	ft_putstr_fd.c	\
-		  ft_putendl_fd.c	ft_putnbr_fd.c
-
-BONUS	= \
+		  ft_putendl_fd.c	ft_putnbr_fd.c								\
 		  ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.c \
 		  ft_lstadd_back.c	ft_lstdelone.c		ft_lstclear.c	ft_lstiter.c \
 		  ft_lstmap.c
 
-NAME		= libft.a
-OBJS_SRCS	= ${SRCS:.c=.o}
-OBJS_BONUS	= ${BONUS:.c=.o}
-
-ifdef WITH_BONUS
-	OBJS = ${OBJS_SRCS} ${OBJS_BONUS}
-else
-	OBJS = ${OBJS_SRCS}
-endif
+NAME	= libft.a
+OBJS	= ${SRCS:.c=.o}
 
 all: ${NAME}
 
@@ -47,11 +38,8 @@ ${NAME}: ${OBJS}
 %.o: %.c
 	@${CC} ${CFLAGS} -c $< -o $@
 
-bonus:
-	@make WITH_BONUS=1 all
-
 clean:
-	@rm -f ${OBJS_SRCS} ${OBJS_BONUS}
+	@rm -f ${OBJS}
 
 fclean: clean
 	@rm -f ${NAME}
@@ -60,4 +48,4 @@ re:
 	@make fclean
 	@make all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

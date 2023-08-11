@@ -6,7 +6,7 @@
 #    By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/05 16:11:17 by jiyunlee          #+#    #+#              #
-#    Updated: 2023/08/08 16:15:26 by jiyunlee         ###   ########.fr        #
+#    Updated: 2023/08/11 15:13:52 by jiyunlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ ${NAME}: ${OBJS}
 	@echo "[ libftprintf ]	Ready to use libftprintf.a"
 	@make -C ${MLX_DIR}
 	@echo "[ mlx ]		Ready to use MiniLibX"
-	@$(CC) -o ${NAME} $(OBJS) -L${LIB_DIR} -lftprintf $(MLIB)
+	@${CC} -o ${NAME} ${OBJS} -L${LIB_DIR} -lftprintf ${MLIB}
 	@install_name_tool -change libmlx.dylib mlx/libmlx.dylib ${NAME}
 	@echo "[ so_long ]	Ready to use so_long"
 
