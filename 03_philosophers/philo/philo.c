@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:59:43 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/22 19:15:04 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/23 19:44:48 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void leaks()
+{
+	system("leaks philo");
+}
 
 int	error_print(char *str)
 {
@@ -24,6 +29,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 	t_philo	*philo;
 
+	// atexit(leaks);
 	if (argc < 5 || argc > 6)
 		return (EXIT_FAILURE);
 	memset(&data, 0, sizeof(t_data));

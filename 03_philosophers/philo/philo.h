@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:58:46 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/23 03:50:50 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/23 19:26:10 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,15 @@ typedef struct s_data
 	int				number_of_times_eat;
 	long long		start_time;
 	pthread_mutex_t	print;
+	int				no_print;
+
 	pthread_mutex_t	dead;
-	int				someone_dead; // dead flag
 	int				finish;
-	int				finish_eat;
+
 	pthread_mutex_t	*forks;
+
+	pthread_mutex_t full;
+	int				finish_eat;
 }	t_data;
 
 typedef struct s_philo
@@ -45,6 +49,7 @@ typedef struct s_philo
 	int			left_fork;
 	int			right_fork;
 	int			eat_count;
+	pthread_mutex_t	time;
 	long long	last_eat_time;
 	t_data		*data;
 	pthread_t	thread_id;
