@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:50:50 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/21 17:21:48 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:15:02 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,10 @@ int	ft_atoi(const char *str)
 	return (num);
 }
 
-// int	ft_atoi(const char *str)
-// {
-// 	long long	num;
-// 	int			sign;
+long long	get_time()
+{
+	struct timeval  time;
 
-// 	num = 0;
-// 	sign = 1;
-// 	while ((9 <= *str && *str <= 13) || *str == ' ')
-// 		str++;
-// 	if (*str == '+')
-// 		str++;
-// 	else if (*str == '-')
-// 	{
-// 		sign = -1;
-// 		str++;
-// 	}
-// 	while (*str && ft_isdigit(*str))
-// 	{
-// 		num = num * 10 + (*str - '0');
-// 		str++;
-// 	}
-// 	return (sign * num);
-// }
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
