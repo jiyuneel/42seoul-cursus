@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:58:46 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/25 18:08:51 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:04:01 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,12 @@ typedef struct s_data
 	int				number_of_times_eat;
 	long long		start_time;
 	pthread_mutex_t	*forks;
-
-	pthread_mutex_t	print_mutex;
-	int				no_print;
-
-	pthread_mutex_t	dead_mutex;
 	int				dead_flag;
-
-	pthread_mutex_t full_mutex;
+	pthread_mutex_t	dead_mutex;
 	int				full_count;
-
-	// pthread_mutex_t	monitor_mutex;
+	pthread_mutex_t full_mutex;
+	int				no_print;
+	pthread_mutex_t	print_mutex;
 }	t_data;
 
 typedef struct s_philo
@@ -64,17 +59,15 @@ typedef struct s_philo
 	int				left_fork;
 	int				right_fork;
 	int				eat_count;
-	pthread_mutex_t	time_mutex;
 	long long		last_eat_time;
+	pthread_mutex_t	time_mutex;
 }	t_philo;
 
 int 		data_init(t_data *data, int argc, char **argv);
 int			philo_init(t_data *data, t_philo **philo);
 int 		philo_start(t_data *data, t_philo *philo);
-void		philo_monitor(t_data *data, t_philo *philo);
-int			check_finish(t_data *data);
-// void		philo_print(t_philo *philo, char *str);
 void		philo_print(t_data *data, t_philo *philo, t_state state);
+int			check_finish(t_data *data);
 long long   get_time();
 void		delay_time(int time, t_data *data);
 void		free_philo(t_data *data, t_philo *philo);

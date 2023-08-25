@@ -6,11 +6,30 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:50:50 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/25 18:13:11 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:02:22 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	check_finish(t_data *data)
+{
+	pthread_mutex_lock(&data->dead_mutex);
+	if (data->dead_flag)
+	{
+		pthread_mutex_unlock(&data->dead_mutex);
+		return (TRUE);
+	}
+	pthread_mutex_unlock(&data->dead_mutex);
+	pthread_mutex_lock(&data->full_mutex);
+	if (data->full_count == data->number_of_philos)
+	{
+		pthread_mutex_unlock(&data->full_mutex);
+		return (TRUE);
+	}
+	pthread_mutex_unlock(&data->full_mutex);
+	return (FALSE);
+}
 
 long long	get_time()
 {
@@ -35,10 +54,10 @@ void	delay_time(int time, t_data *data)
 
 void	philo_print(t_data *data, t_philo *philo, t_state state)
 {
-	pthread_mutex_lock(&philo->data->print_mutex);
-	if (philo->data->no_print)
+	pthread_mutex_lock(&data->print_mutex);
+	if (data->no_print)
 	{
-		pthread_mutex_unlock(&philo->data->print_mutex);
+		pthread_mutex_unlock(&data->print_mutex);
 		return ;
 	}
 	printf("%lld %d ", get_time() - data->start_time, philo->id);
@@ -55,7 +74,7 @@ void	philo_print(t_data *data, t_philo *philo, t_state state)
 		data->no_print = TRUE;
 		printf("died\n");
 	}
-	pthread_mutex_unlock(&philo->data->print_mutex);
+	pthread_mutex_unlock(&data->print_mutex);
 }
 
 void	free_philo(t_data *data, t_philo *philo)
@@ -73,5 +92,5 @@ void	free_philo(t_data *data, t_philo *philo)
 	pthread_mutex_destroy(&data->dead_mutex);
 	pthread_mutex_destroy(&data->full_mutex);
 	free(data->forks);
-	// free(philo);	// 안해도 leak 없음 (?)
+	free(philo);	// 안해도 leak 없음 (?)
 }
