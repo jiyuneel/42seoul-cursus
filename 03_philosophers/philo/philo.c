@@ -6,16 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:59:43 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/25 16:26:50 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:51:05 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void leaks()
-{
-	system("leaks -s philo");
-}
 
 int	error_print(char *str)
 {
@@ -28,7 +23,6 @@ int	main(int argc, char **argv)
 	t_data	data;
 	t_philo	*philo;
 
-	// atexit(leaks);
 	if (argc < 5 || argc > 6)
 		return (error_print("Error\n"));
 	if (data_init(&data, argc, argv))

@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:24:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/25 18:57:54 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/26 06:37:36 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	*philo_thread(void *ph)
 
 	philo = (t_philo *)ph;
 	data = philo->data;
-	// usleep(200);
 	if (philo->id % 2 == 0)
 		usleep(500);
 	while (!check_finish(data))
@@ -103,9 +102,8 @@ int	philo_sleep_think(t_data *data, t_philo *philo)
 
 void	philo_monitor(t_data *data, t_philo *philo)
 {
-	int			i;
+	int	i;
 
-	// usleep(500);
 	while (!check_finish(data))
 	{
 		i = 0;
@@ -124,6 +122,5 @@ void	philo_monitor(t_data *data, t_philo *philo)
 			pthread_mutex_unlock(&philo[i].time_mutex);
 			i++;
 		}
-		// usleep(200);
 	}
 }

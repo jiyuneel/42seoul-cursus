@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:50:50 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/25 19:02:22 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/26 06:25:23 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_finish(t_data *data)
 	return (FALSE);
 }
 
-long long	get_time()
+long long	get_time(void)
 {
 	struct timeval  time;
 
@@ -44,18 +44,14 @@ void	delay_time(int time, t_data *data)
 	long long	start;
 
 	start = get_time();
-	while (get_time() - start < time)
-	{
-		if (check_finish(data))
-			break ;
+	while ((get_time() - start < time) && !check_finish(data))
 		usleep(200);
-	}
 }
 
 void	philo_print(t_data *data, t_philo *philo, t_state state)
 {
 	pthread_mutex_lock(&data->print_mutex);
-	if (data->no_print)
+	if (data->stop_print)
 	{
 		pthread_mutex_unlock(&data->print_mutex);
 		return ;
@@ -71,7 +67,7 @@ void	philo_print(t_data *data, t_philo *philo, t_state state)
 		printf("is thinking\n");
 	else if (state == DIE)
 	{
-		data->no_print = TRUE;
+		data->stop_print = TRUE;
 		printf("died\n");
 	}
 	pthread_mutex_unlock(&data->print_mutex);
@@ -92,5 +88,5 @@ void	free_philo(t_data *data, t_philo *philo)
 	pthread_mutex_destroy(&data->dead_mutex);
 	pthread_mutex_destroy(&data->full_mutex);
 	free(data->forks);
-	free(philo);	// 안해도 leak 없음 (?)
+	free(philo);
 }
