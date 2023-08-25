@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:24:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/26 06:37:36 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/26 06:52:54 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	philo_monitor(t_data *data, t_philo *philo)
 		while (i < data->number_of_philos)
 		{
 			pthread_mutex_lock(&philo[i].time_mutex);
-			if (get_time() - philo[i].last_eat_time >= data->time_to_die)
+			if (get_time() - philo[i].last_eat_time > data->time_to_die)
 			{
 				pthread_mutex_unlock(&philo[i].time_mutex);
                 philo_print(data, &philo[i], DIE);
