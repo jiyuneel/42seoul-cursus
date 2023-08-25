@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:59:43 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/23 19:44:48 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:26:50 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void leaks()
 {
-	system("leaks philo");
+	system("leaks -s philo");
 }
 
 int	error_print(char *str)
 {
-	// malloc한 거 free해주기
-	printf("%s\n", str);
+	printf("%s", str);
 	return (EXIT_FAILURE);
 }
 
@@ -31,13 +30,12 @@ int	main(int argc, char **argv)
 
 	// atexit(leaks);
 	if (argc < 5 || argc > 6)
-		return (EXIT_FAILURE);
-	memset(&data, 0, sizeof(t_data));
+		return (error_print("Error\n"));
 	if (data_init(&data, argc, argv))
-		return (error_print("error data init"));
+		return (error_print("Error\nFail to initialize data.\n"));
 	if (philo_init(&data, &philo))
-		return (error_print("error philo init"));
+		return (error_print("Error\nFail to initialize philosophers."));
 	if (philo_start(&data, philo))
-		return (error_print("error philo start"));
+		return (error_print("Error\nFail to run the program."));
 	return (EXIT_SUCCESS);
 }

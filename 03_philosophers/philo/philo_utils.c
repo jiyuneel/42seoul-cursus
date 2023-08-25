@@ -6,33 +6,11 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:50:50 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/22 19:15:02 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:13:11 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_isdigit(int c)
-{
-	if ('0' <= c && c <= '9')
-		return (c);
-	return (0);
-}
-
-int	ft_atoi(const char *str)
-{
-	long long	num;
-
-	num = 0;
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			return (-1);
-		num = num * 10 + (*str - '0');
-		str++;
-	}
-	return (num);
-}
 
 long long	get_time()
 {
@@ -40,4 +18,60 @@ long long	get_time()
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	delay_time(int time, t_data *data)
+{
+	long long	start;
+
+	start = get_time();
+	while (get_time() - start < time)
+	{
+		if (check_finish(data))
+			break ;
+		usleep(200);
+	}
+}
+
+void	philo_print(t_data *data, t_philo *philo, t_state state)
+{
+	pthread_mutex_lock(&philo->data->print_mutex);
+	if (philo->data->no_print)
+	{
+		pthread_mutex_unlock(&philo->data->print_mutex);
+		return ;
+	}
+	printf("%lld %d ", get_time() - data->start_time, philo->id);
+	if (state == FORK)
+		printf("has taken a fork\n");
+	else if (state == EAT)
+		printf("is eating\n");
+	else if (state == SLEEP)
+		printf("is sleeping\n");
+	else if (state == THINK)
+		printf("is thinking\n");
+	else if (state == DIE)
+	{
+		data->no_print = TRUE;
+		printf("died\n");
+	}
+	pthread_mutex_unlock(&philo->data->print_mutex);
+}
+
+void	free_philo(t_data *data, t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->number_of_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&philo[i].time_mutex);
+		i++;
+	}
+	pthread_mutex_destroy(&data->print_mutex);
+	pthread_mutex_destroy(&data->dead_mutex);
+	pthread_mutex_destroy(&data->full_mutex);
+	free(data->forks);
+	// free(philo);	// 안해도 leak 없음 (?)
 }

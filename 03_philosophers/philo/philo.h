@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:58:46 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/23 19:26:10 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:08:51 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,19 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-# define TRUE	1
-# define FALSE	0
+# define TRUE		1
+# define FALSE		0
+# define CONTINUE	1
+# define BREAK		0
+
+typedef enum e_state
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIE
+}	t_state;
 
 typedef struct s_data
 {
@@ -31,34 +42,41 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				number_of_times_eat;
 	long long		start_time;
-	pthread_mutex_t	print;
-	int				no_print;
-
-	pthread_mutex_t	dead;
-	int				finish;
-
 	pthread_mutex_t	*forks;
 
-	pthread_mutex_t full;
-	int				finish_eat;
+	pthread_mutex_t	print_mutex;
+	int				no_print;
+
+	pthread_mutex_t	dead_mutex;
+	int				dead_flag;
+
+	pthread_mutex_t full_mutex;
+	int				full_count;
+
+	// pthread_mutex_t	monitor_mutex;
 }	t_data;
 
 typedef struct s_philo
 {
-	int			id;
-	int			left_fork;
-	int			right_fork;
-	int			eat_count;
-	pthread_mutex_t	time;
-	long long	last_eat_time;
-	t_data		*data;
-	pthread_t	thread_id;
+	pthread_t		thread_id;
+	t_data			*data;
+	int				id;
+	int				left_fork;
+	int				right_fork;
+	int				eat_count;
+	pthread_mutex_t	time_mutex;
+	long long		last_eat_time;
 }	t_philo;
 
 int 		data_init(t_data *data, int argc, char **argv);
 int			philo_init(t_data *data, t_philo **philo);
-int			ft_atoi(const char *str);
 int 		philo_start(t_data *data, t_philo *philo);
+void		philo_monitor(t_data *data, t_philo *philo);
+int			check_finish(t_data *data);
+// void		philo_print(t_philo *philo, char *str);
+void		philo_print(t_data *data, t_philo *philo, t_state state);
 long long   get_time();
+void		delay_time(int time, t_data *data);
+void		free_philo(t_data *data, t_philo *philo);
 
 #endif

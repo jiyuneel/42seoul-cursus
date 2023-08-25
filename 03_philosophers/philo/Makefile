@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiyunlee <jiyunlee@student.42.fr>          +#+  +:+       +#+         #
+#    By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 16:41:00 by jiyunlee          #+#    #+#              #
-#    Updated: 2023/08/23 19:39:32 by jiyunlee         ###   ########.fr        #
+#    Updated: 2023/08/25 18:29:26 by jiyunlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,22 +15,26 @@ NAME	= philo
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror #-fsanitize=thread -g3
 
-SRCS	= philo.c		philo_init.c	philo_start.c	philo_utils.c
+SRCS	= philo.c		philo_init.c	philo_start.c	philo_monitor.c \
+		  philo_utils.c
 OBJS	= ${SRCS:.c=.o}
 
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+	@${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+	@echo "[ philo ]	Ready to run philo"
 
 %.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	rm -f ${OBJS}
+	@rm -f ${OBJS}
+	@echo "[ philo ]	Object files removed"
 
-fclean: clean
-	rm -f ${NAME}
+fclean:
+	@rm -f ${OBJS} ${NAME}
+	@echo "[ philo ]	Files removed"
 
 re:	fclean all
 
