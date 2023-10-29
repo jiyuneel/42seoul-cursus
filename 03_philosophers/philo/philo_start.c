@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 00:24:38 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/26 06:52:54 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:51:53 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	philo_monitor(t_data *data, t_philo *philo)
 			if (get_time() - philo[i].last_eat_time > data->time_to_die)
 			{
 				pthread_mutex_unlock(&philo[i].time_mutex);
-                philo_print(data, &philo[i], DIE);
+				philo_print(data, &philo[i], DIE);
 				pthread_mutex_lock(&data->dead_mutex);
 				data->dead_flag = TRUE;
 				pthread_mutex_unlock(&data->dead_mutex);

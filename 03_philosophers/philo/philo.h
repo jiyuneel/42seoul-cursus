@@ -6,7 +6,7 @@
 /*   By: jiyunlee <jiyunlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:58:46 by jiyunlee          #+#    #+#             */
-/*   Updated: 2023/08/26 06:21:38 by jiyunlee         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:51:58 by jiyunlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_data
 	int				dead_flag;
 	pthread_mutex_t	dead_mutex;
 	int				full_count;
-	pthread_mutex_t full_mutex;
+	pthread_mutex_t	full_mutex;
 	int				stop_print;
 	pthread_mutex_t	print_mutex;
 }	t_data;
@@ -63,12 +63,12 @@ typedef struct s_philo
 	pthread_mutex_t	time_mutex;
 }	t_philo;
 
-int 		data_init(t_data *data, int argc, char **argv);
+int			data_init(t_data *data, int argc, char **argv);
 int			philo_init(t_data *data, t_philo **philo);
-int 		philo_start(t_data *data, t_philo *philo);
+int			philo_start(t_data *data, t_philo *philo);
 void		philo_print(t_data *data, t_philo *philo, t_state state);
 int			check_finish(t_data *data);
-long long   get_time(void);
+long long	get_time(void);
 void		delay_time(int time, t_data *data);
 void		free_philo(t_data *data, t_philo *philo);
 
