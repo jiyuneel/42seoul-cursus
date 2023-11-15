@@ -8,17 +8,16 @@ private:
     Contact contacts[8];
     int index;
 
-    void searchAllContacts();
-    void printContact(int index);
-    bool isValidRange(int index);
+    void handleEof();
+    void printAllContacts();
     std::string truncateStr(std::string str);
 
 public:
     PhoneBook();
+    ~PhoneBook();
 
     void addContact();
     void searchContact();
-    void exit();
 };
 
 #endif
