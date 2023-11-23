@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include <iomanip>
 #include <cstdio>
+#include <sstream>
 
 PhoneBook::PhoneBook() {
     this->index = 0;
@@ -103,7 +104,9 @@ void PhoneBook::searchContact() {
         }
     }
 
-    int index = std::stoi(indexStr);
+    int index;
+    std::stringstream ss(indexStr);
+    ss >> index;
     if (this->index >= index && (1 <= index && index <= 8)) {
         std::cout << "First Name     : " << contacts[index - 1].getFirstName() << std::endl;
         std::cout << "Last Name      : " << contacts[index - 1].getLastName() << std::endl;
