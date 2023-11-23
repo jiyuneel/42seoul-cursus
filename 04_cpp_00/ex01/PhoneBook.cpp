@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 #include <iomanip>
+#include <cstdio>
 
 PhoneBook::PhoneBook() {
     this->index = 0;
