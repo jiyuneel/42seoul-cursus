@@ -123,7 +123,7 @@ void PhoneBook::printAllContacts() {
     std::cout << std::setw(10) << std::right << "Index" << "|";
     std::cout << std::setw(10) << std::right << "First Name" << "|";
     std::cout << std::setw(10) << std::right << "Last Name" << "|";
-    std::cout << std::setw(10) << std::right << "Nickame" << std::endl;
+    std::cout << std::setw(10) << std::right << "Nickname" << std::endl;
     std::cout << "----------+----------+----------+----------" << std::endl;
 
     int n = index <= 8 ? index : 8;
