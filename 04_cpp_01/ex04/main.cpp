@@ -18,13 +18,14 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    std::string filename(argv[1]);
-    std::ifstream infile(filename);
+    std::string infilename(argv[1]);
+    std::ifstream infile(infilename.c_str());
     if (!infile.is_open()) {
         std::cout << "ERROR: Cannot open file" << std::endl;
         return 1;
     }
-    std::ofstream outfile(filename + ".replace");
+    std::string outfilename(infilename + ".replace");
+    std::ofstream outfile(outfilename.c_str());
     if (!outfile.is_open()) {
         std::cout << "ERROR: Cannot open file" << std::endl;
         return 1;
