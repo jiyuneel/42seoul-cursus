@@ -22,7 +22,7 @@ Fixed::~Fixed() {
     std::cout << "Destructor called" << std::endl;
 }
 
-int Fixed::getRawBits( void ) const{
+int Fixed::getRawBits( void ) const {
     std::cout << "getRawBits member function called" << std::endl;
     return this->_num;
 }

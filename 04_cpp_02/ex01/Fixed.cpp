@@ -1,6 +1,6 @@
 #include "Fixed.hpp"
 
-/* Default constructor */
+/* Constructor */
 Fixed::Fixed() : _num(0) {
     std::cout << "Default constructor called" << std::endl;
 }
@@ -27,9 +27,6 @@ Fixed& Fixed::operator=(const Fixed& fixed) {
     }
     return (*this);
 }
-std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
-    return out << fixed.toFloat();
-}
 
 /* Destructor */
 Fixed::~Fixed() {
@@ -39,7 +36,6 @@ Fixed::~Fixed() {
 int Fixed::getRawBits( void ) const{
     return this->_num;
 }
-
 void Fixed::setRawBits( int const raw ) {
     this->_num = raw;
 }
@@ -47,7 +43,10 @@ void Fixed::setRawBits( int const raw ) {
 float Fixed::toFloat( void ) const {
     return (float)this->_num / (1 << this->_bit);
 }
-
 int Fixed::toInt( void ) const {
     return this->_num >> this->_bit;
+}
+
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
+    return out << fixed.toFloat();
 }
