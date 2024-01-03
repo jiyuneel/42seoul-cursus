@@ -1,7 +1,6 @@
 #ifndef HUMAN_A_HPP
 #define HUMAN_A_HPP
 
-#include <iostream>
 #include "Weapon.hpp"
 
 class HumanA {

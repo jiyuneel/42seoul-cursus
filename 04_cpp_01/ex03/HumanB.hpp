@@ -1,7 +1,6 @@
 #ifndef HUMAN_B_HPP
 #define HUMAN_B_HPP
 
-#include <iostream>
 #include "Weapon.hpp"
 
 class HumanB {
