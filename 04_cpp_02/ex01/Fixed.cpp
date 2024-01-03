@@ -33,6 +33,11 @@ Fixed::~Fixed() {
     std::cout << "Destructor called" << std::endl;
 }
 
+/* insertion operator (<<) */
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
+    return out << fixed.toFloat();
+}
+
 int Fixed::getRawBits( void ) const{
     return this->_num;
 }
@@ -45,8 +50,4 @@ float Fixed::toFloat( void ) const {
 }
 int Fixed::toInt( void ) const {
     return this->_num >> this->_bit;
-}
-
-std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
-    return out << fixed.toFloat();
 }

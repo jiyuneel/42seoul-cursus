@@ -1,42 +1,36 @@
 #include "Fixed.hpp"
 
 /* Constructor */
-Fixed::Fixed() : _num(0) {
-    // std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed() : _num(0) {}
 Fixed::Fixed(const int value) {
-    // std::cout << "Int constructor called" << std::endl;
     this->_num = value << this->_bit;
 }
 Fixed::Fixed(const float value) {
-    // std::cout << "Float constructor called" << std::endl;
     this->_num = roundf(value * (1 << this->_bit));
 }
 
 /* Copy constructor */
 Fixed::Fixed(const Fixed& fixed) {
-    // std::cout << "Copy constructor called" << std::endl;
     *this = fixed;
 }
 
 /* Copy assignment operator */
 Fixed& Fixed::operator=(const Fixed& fixed) {
-    // std::cout << "Copy assignment operator called" << std::endl;
     if (this != &fixed) {
         this->_num = fixed.getRawBits();
     }
     return (*this);
 }
+
+/* Destructor */
+Fixed::~Fixed() {}
+
+/* insertion operator (<<) */
 std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
     return out << fixed.toFloat();
 }
 
-/* Destructor */
-Fixed::~Fixed() {
-    // std::cout << "Destructor called" << std::endl;
-}
-
-/* 6 comparison operators (>, <, >=, <=, ==, !=) */
+/* comparison operators (>, <, >=, <=, ==, !=) */
 bool Fixed::operator>(const Fixed& fixed) const {
     return this->_num > fixed.getRawBits();
 }
@@ -56,7 +50,7 @@ bool Fixed::operator!=(const Fixed& fixed) const {
     return this->_num != fixed.getRawBits();
 }
 
-/* 4 arithmetic operators (+, -, *, /) */
+/* arithmetic operators (+, -, *, /) */
 Fixed Fixed::operator+(const Fixed& fixed) {
     return Fixed(this->toFloat() + fixed.toFloat());
 }
@@ -70,7 +64,7 @@ Fixed Fixed::operator/(const Fixed& fixed) {
     return Fixed(this->toFloat() / fixed.toFloat());
 }
 
-/* 4 increment/decrement operators (++x, x++, --x, x--) */
+/* increment/decrement operators (++x, x++, --x, x--) */
 Fixed& Fixed::operator++(void) {
     this->_num++;
     return *this;
