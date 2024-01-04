@@ -2,18 +2,21 @@
 
 int main() {
     ClapTrap jiyun("Jiyun");
-    ClapTrap Abcde("Abcde");
+    ClapTrap abcde("Abcde");
+
+    jiyun.showStatus();
+    abcde.showStatus();
 
     jiyun.attack("Abcde");
-    Abcde.takeDamage(jiyun.getAttackDamage());
+    abcde.takeDamage(jiyun.getAttackDamage());
     jiyun.beRepaired(10);
 
-    Abcde.attack("jiyun");
-    jiyun.takeDamage(Abcde.getAttackDamage());
+    jiyun.showStatus();
+    abcde.showStatus();
 
-    while (jiyun.getEnergyPoint()) {
-        jiyun.attack("Abcde");
-        Abcde.takeDamage(jiyun.getAttackDamage());
-    }
-    jiyun.attack("Abcde");
+    abcde.attack("jiyun");
+    jiyun.takeDamage(abcde.getAttackDamage());
+
+    jiyun.showStatus();
+    abcde.showStatus();
 }
