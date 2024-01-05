@@ -1,8 +1,8 @@
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main() {
-    ClapTrap jiyun("Jiyun");
-    ClapTrap abcde("Abcde");
+    ScavTrap jiyun("Jiyun");
+    ScavTrap abcde("Abcde");
 
     jiyun.showStatus();
     abcde.showStatus();
@@ -19,4 +19,6 @@ int main() {
 
     jiyun.showStatus();
     abcde.showStatus();
+
+    abcde.guardGate();
 }

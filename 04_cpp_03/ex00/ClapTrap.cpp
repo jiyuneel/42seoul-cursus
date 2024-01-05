@@ -19,7 +19,6 @@ ClapTrap::ClapTrap(const std::string name) {
 /* Copy constructor */
 ClapTrap::ClapTrap(const ClapTrap& clapTrap) {
     *this = clapTrap;
-    std::cout << "ClapTrap " + this->_name + " constructed" << std::endl;
 }
 
 /* Copy assignment operator */
