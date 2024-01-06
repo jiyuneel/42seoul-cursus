@@ -6,7 +6,7 @@ ScavTrap::ScavTrap() : ClapTrap("Default") {
     this->_hitPoint = 100;
     this->_energyPoint = 50;
     this->_attackDamage = 20;
-    std::cout << "ScavTrap constructed" << std::endl;
+    std::cout << "ScavTrap " + this->_name + " constructed" << std::endl;
 }
 ScavTrap::ScavTrap(const std::string name) : ClapTrap(name) {
     this->_name = name;
@@ -19,6 +19,7 @@ ScavTrap::ScavTrap(const std::string name) : ClapTrap(name) {
 /* Copy constructor */
 ScavTrap::ScavTrap(const ScavTrap& scavTrap) {
     *this = scavTrap;
+    std::cout << "ScavTrap " + this->_name + " constructed" << std::endl;
 }
 
 /* Copy assignment operator */
@@ -28,7 +29,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap) {
         this->_hitPoint = scavTrap.getHitPoint();
         this->_energyPoint = scavTrap.getEnergyPoint();
         this->_attackDamage = scavTrap.getAttackDamage();
-        std::cout << "ScavTrap " + this->_name + " constructed" << std::endl;
+        std::cout << "ScavTrap copy assignment operator called" << std::endl;
     }
     return *this;
 }
@@ -40,7 +41,7 @@ ScavTrap::~ScavTrap() {
 
 void ScavTrap::attack(const std::string& target) {
     if (this->_hitPoint <= 0 || this->_energyPoint <= 0) {
-        std::cout << this->_name << " can't do anything" << std::endl;
+        std::cout << this->_name + " can't do anything" << std::endl;
         return ;
     }
     this->_energyPoint--;
