@@ -6,7 +6,7 @@ ClapTrap::ClapTrap() {
     this->_hitPoint = 10;
     this->_energyPoint = 10;
     this->_attackDamage = 0;
-    std::cout << "ClapTrap constructed" << std::endl;
+    std::cout << "ClapTrap " + this->_name + " constructed" << std::endl;
 }
 ClapTrap::ClapTrap(const std::string name) {
     this->_name = name;
@@ -19,6 +19,7 @@ ClapTrap::ClapTrap(const std::string name) {
 /* Copy constructor */
 ClapTrap::ClapTrap(const ClapTrap& clapTrap) {
     *this = clapTrap;
+    std::cout << "ClapTrap " + this->_name + " constructed" << std::endl;
 }
 
 /* Copy assignment operator */
@@ -28,7 +29,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap) {
         this->_hitPoint = clapTrap.getHitPoint();
         this->_energyPoint = clapTrap.getEnergyPoint();
         this->_attackDamage = clapTrap.getAttackDamage();
-        std::cout << "ClapTrap " + this->_name + " constructed" << std::endl;
+        std::cout << "ClapTrap copy assignment operator called" << std::endl;
     }
     return *this;
 }
