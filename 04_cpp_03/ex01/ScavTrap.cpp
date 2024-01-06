@@ -1,7 +1,7 @@
 #include "ScavTrap.hpp"
 
 /* Constructor */
-ScavTrap::ScavTrap() : ClapTrap("Default") {
+ScavTrap::ScavTrap() : ClapTrap() {
     this->_name = "Default";
     this->_hitPoint = 100;
     this->_energyPoint = 50;
@@ -17,7 +17,7 @@ ScavTrap::ScavTrap(const std::string name) : ClapTrap(name) {
 }
 
 /* Copy constructor */
-ScavTrap::ScavTrap(const ScavTrap& scavTrap) {
+ScavTrap::ScavTrap(const ScavTrap& scavTrap) : ClapTrap() {
     *this = scavTrap;
     std::cout << "ScavTrap " + this->_name + " constructed" << std::endl;
 }

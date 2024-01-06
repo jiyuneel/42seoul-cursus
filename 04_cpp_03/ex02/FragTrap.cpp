@@ -1,7 +1,7 @@
 #include "FragTrap.hpp"
 
 /* Constructor */
-FragTrap::FragTrap() : ClapTrap("Default") {
+FragTrap::FragTrap() : ClapTrap() {
     this->_name = "Default";
     this->_hitPoint = 100;
     this->_energyPoint = 100;
@@ -17,7 +17,7 @@ FragTrap::FragTrap(const std::string name) : ClapTrap(name) {
 }
 
 /* Copy constructor */
-FragTrap::FragTrap(const FragTrap& fragTrap) {
+FragTrap::FragTrap(const FragTrap& fragTrap) : ClapTrap() {
     *this = fragTrap;
     std::cout << "FragTrap " + this->_name + " constructed" << std::endl;
 }
