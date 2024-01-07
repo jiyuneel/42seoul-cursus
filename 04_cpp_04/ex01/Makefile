@@ -3,8 +3,9 @@ CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
 NAME	= animal
-SRCS	= main.cpp	Animal.cpp	Dog.cpp	Cat.cpp \
-		  WrongAnimal.cpp		WrongCat.cpp
+SRCS	= main.cpp	Animal.cpp	Dog.cpp	Cat.cpp	\
+		  WrongAnimal.cpp		WrongCat.cpp	\
+		  Brain.cpp
 OBJS	= ${SRCS:.cpp=.o}
 
 all: ${NAME}
