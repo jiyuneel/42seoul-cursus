@@ -1,15 +1,31 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongCat.hpp"
+
+void leaks() {
+    system("leaks -s animal");
+}
 
 int main() {
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound(); //will output the cat sound!
-    j->makeSound();
-    meta->makeSound();
-    // ...
+    const Animal* animal = new Animal();
+    const Animal* dog = new Dog();
+    const Animal* cat = new Cat();
+
+    std::cout << dog->getType() << " " << std::endl;
+    std::cout << cat->getType() << " " << std::endl;
+    dog->makeSound();
+    cat->makeSound();
+    animal->makeSound();
+
+    const WrongAnimal* wrongCat = new WrongCat();
+
+    wrongCat->makeSound();
+
+    delete animal;
+    delete dog;
+    delete cat;
+
+    atexit(leaks);
+
     return 0;
 }
