@@ -1,12 +1,7 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-void leaks() {
-    system("leaks -s brain");
-}
-
 int main() {
-    atexit(leaks);
     const Animal* animals[4];
 
     for (int i = 0; i < 4; i++) {
