@@ -3,12 +3,7 @@
 #include "Character.hpp"
 #include "MateriaSource.hpp"
 
-void leaks() {
-    system("leaks -s materia");
-}
-
 int main() {
-    atexit(leaks);
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
@@ -23,7 +18,7 @@ int main() {
     me->equip(tmp);
     delete tmp;
 
-    // me->unequip(0);
+    me->unequip(0);
 
     ICharacter* bob = new Character("bob");
 

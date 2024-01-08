@@ -10,7 +10,7 @@ private:
     int _numOfMaterias;
     int _numOfTrash;
     AMateria* _inventory[4];
-    AMateria*  _floor[100];
+    AMateria*  _floor[1000];
 
 public:
     Character();
