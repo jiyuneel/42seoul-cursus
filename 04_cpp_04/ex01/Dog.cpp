@@ -15,8 +15,7 @@ Dog::Dog(const Dog& dog) : Animal() {
 Dog& Dog::operator=(const Dog& dog) {
     if (this != &dog) {
         this->_type = dog.getType();
-        delete dog.getBrain();
-        this->_brain = new Brain();
+        this->_brain = new Brain(*dog.getBrain());
     }
     return *this;
 }
@@ -26,7 +25,7 @@ Dog::~Dog() {
     std::cout << "Dog destroyed" << std::endl;
 }
 
-const Brain* Dog::getBrain() const {
+Brain* Dog::getBrain() const {
     return this->_brain;
 }
 

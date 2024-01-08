@@ -1,24 +1,38 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongCat.hpp"
+
+void leaks() {
+    system("leaks -s brain");
+}
 
 int main() {
-    const Animal* animal = new Animal();
-    const Animal* dog = new Dog();
-    const Animal* cat = new Cat();
-    const WrongAnimal* wrongCat = new WrongCat();
+    atexit(leaks);
+    const Animal* animals[4];
 
-    std::cout << dog->getType() << " " << std::endl;
-    std::cout << cat->getType() << " " << std::endl;
-    dog->makeSound();
-    cat->makeSound();
-    animal->makeSound();
-    wrongCat->makeSound();
+    for (int i = 0; i < 4; i++) {
+        if (i % 2 == 0)
+            animals[i] = new Dog();
+        else
+            animals[i] = new Cat();
+    }
+    for (int i = 0; i < 4; i++) {
+        delete animals[i];
+    }
 
-    delete animal;
-    delete dog;
-    delete cat;
-    delete wrongCat;
+    const Dog* dog1 = new Dog();
+    dog1->getBrain()->setIdea("🐾🐾🐾🐾", 0);
+    dog1->getBrain()->setIdea("🦴🦴🦴🦴", 1);
+
+    const Dog* dog2 = new Dog(*dog1);
+    dog2->getBrain()->setIdea("🐶🐶🐶🐶", 0);
+
+    std::cout << dog1->getBrain()->getIdea(0) << std::endl;
+    std::cout << dog1->getBrain()->getIdea(1) << std::endl;
+    std::cout << dog2->getBrain()->getIdea(0) << std::endl;
+    std::cout << dog2->getBrain()->getIdea(1) << std::endl;
+
+    delete dog1;
+    delete dog2;
 
     return 0;
 }

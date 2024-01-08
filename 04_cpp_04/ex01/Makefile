@@ -2,7 +2,7 @@ CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -f
 
-NAME	= animal
+NAME	= brain
 SRCS	= main.cpp	Animal.cpp	Dog.cpp	Cat.cpp	\
 		  WrongAnimal.cpp		WrongCat.cpp	\
 		  Brain.cpp
